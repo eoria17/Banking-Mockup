@@ -9,8 +9,8 @@ namespace s3827202_s3687609_a2.Models
         [Required,Key]
         public int AccountNumber { get; set; }
 
-        [RegularExpression(@"^[CS]\b", ErrorMessage = "Please input the correct account type format(e.g C or S)")]
         [Required]
+        [RegularExpression(@"^[CS]\b", ErrorMessage = "Please input the correct account type format(e.g C or S)")]
         public string AccountType { get; set; }
 
         [Required]

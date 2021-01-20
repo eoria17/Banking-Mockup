@@ -22,7 +22,7 @@ namespace s3827202_s3687609_a2.Models
         [Required,DataType(DataType.Date)]
         public DateTime ScheduleDate { get; set; }
 
-        [RegularExpression(@"^[MQS]\b",ErrorMessage = "Please input the correct perios format(e.g Monthly (M), Quarterly (Q) or Once off (S)")]
+        [RegularExpression(@"^[MQS]\b",ErrorMessage = "Please input the correct period format(e.g Monthly (M), Quarterly (Q) or Once off (S)")]
         [Required]
         public string Period { get; set; }
 
