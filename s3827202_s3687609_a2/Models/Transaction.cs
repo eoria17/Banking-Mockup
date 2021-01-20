@@ -1,11 +1,11 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace s3827202_s3687609_a2.Models
 {
     public class Transaction
     {
-        [Required,Key]
         public int TransactionID { get; set; }
 
         [Required,StringLength(1)]
@@ -13,13 +13,17 @@ namespace s3827202_s3687609_a2.Models
 
         [Required]
         public int AccountNumber { get; set; }
-        public Account Account { get; set; }
+        [ForeignKey("AccountNumber")]
+        public Account SourceAccount { get; set; }
 
-        public int DestAccount { get; set; }
-        public decimal Amount { get; set; }
+        public int? DestAccount { get; set; }
+        [ForeignKey("DestAccount")]
+        public Account DestinationAccount { get; set; }
+
+        public decimal? Amount { get; set; }
 
         [StringLength(255)]
-        public string Comment { get; set; }
+        public string? Comment { get; set; }
 
         [DataType(DataType.Date)]
         public DateTime ModifyDate { get; set; }

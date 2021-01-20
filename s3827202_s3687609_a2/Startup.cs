@@ -3,10 +3,8 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
+using s3827202_s3687609_a2.Data;
 
 namespace s3827202_s3687609_a2
 {
@@ -23,6 +21,9 @@ namespace s3827202_s3687609_a2
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
+
+            services.AddDbContext<BankDBContext>(options =>
+            options.UseSqlServer(Configuration.GetConnectionString("BankDBContext")));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

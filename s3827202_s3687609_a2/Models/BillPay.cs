@@ -1,15 +1,16 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace s3827202_s3687609_a2.Models
 {
     public class BillPay
     {
-        [Required,Key]
         public int BillPayID { get; set; }
 
         [Required]
         public int AccountNumber { get; set; }
+        [ForeignKey("AccountNumber")]
         public Account Account { get; set; }
 
         [Required]

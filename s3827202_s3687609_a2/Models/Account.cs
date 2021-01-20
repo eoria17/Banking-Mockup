@@ -6,7 +6,7 @@ namespace s3827202_s3687609_a2.Models
 {
     public class Account
     {
-        [Required,Key]
+        [Key]
         public int AccountNumber { get; set; }
 
         [Required]

@@ -53,9 +53,6 @@ namespace s3827202_s3687609_a2.Migrations
                     b.Property<int>("AccountNumber")
                         .HasColumnType("int");
 
-                    b.Property<int?>("AccountNumber1")
-                        .HasColumnType("int");
-
                     b.Property<decimal>("Amount")
                         .HasColumnType("decimal(18,2)");
 
@@ -74,7 +71,7 @@ namespace s3827202_s3687609_a2.Migrations
 
                     b.HasKey("BillPayID");
 
-                    b.HasIndex("AccountNumber1");
+                    b.HasIndex("AccountNumber");
 
                     b.HasIndex("PayeeID");
 
@@ -105,7 +102,7 @@ namespace s3827202_s3687609_a2.Migrations
                         .HasMaxLength(15)
                         .HasColumnType("int");
 
-                    b.Property<int>("PostCode")
+                    b.Property<int?>("PostCode")
                         .HasMaxLength(10)
                         .HasColumnType("int");
 
@@ -170,7 +167,7 @@ namespace s3827202_s3687609_a2.Migrations
                         .HasMaxLength(15)
                         .HasColumnType("int");
 
-                    b.Property<int>("PostCode")
+                    b.Property<int?>("PostCode")
                         .HasMaxLength(10)
                         .HasColumnType("int");
 
@@ -192,17 +189,14 @@ namespace s3827202_s3687609_a2.Migrations
                     b.Property<int>("AccountNumber")
                         .HasColumnType("int");
 
-                    b.Property<int?>("AccountNumber1")
-                        .HasColumnType("int");
-
-                    b.Property<decimal>("Amount")
+                    b.Property<decimal?>("Amount")
                         .HasColumnType("decimal(18,2)");
 
                     b.Property<string>("Comment")
                         .HasMaxLength(255)
                         .HasColumnType("nvarchar(255)");
 
-                    b.Property<int>("DestAccount")
+                    b.Property<int?>("DestAccount")
                         .HasColumnType("int");
 
                     b.Property<DateTime>("ModifyDate")
@@ -215,7 +209,9 @@ namespace s3827202_s3687609_a2.Migrations
 
                     b.HasKey("TransactionID");
 
-                    b.HasIndex("AccountNumber1");
+                    b.HasIndex("AccountNumber");
+
+                    b.HasIndex("DestAccount");
 
                     b.ToTable("Transaction");
                 });
@@ -235,7 +231,9 @@ namespace s3827202_s3687609_a2.Migrations
                 {
                     b.HasOne("s3827202_s3687609_a2.Models.Account", "Account")
                         .WithMany()
-                        .HasForeignKey("AccountNumber1");
+                        .HasForeignKey("AccountNumber")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("s3827202_s3687609_a2.Models.Payee", "Payee")
                         .WithMany()
@@ -261,11 +259,19 @@ namespace s3827202_s3687609_a2.Migrations
 
             modelBuilder.Entity("s3827202_s3687609_a2.Models.Transaction", b =>
                 {
-                    b.HasOne("s3827202_s3687609_a2.Models.Account", "Account")
+                    b.HasOne("s3827202_s3687609_a2.Models.Account", "SourceAccount")
                         .WithMany()
-                        .HasForeignKey("AccountNumber1");
+                        .HasForeignKey("AccountNumber")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
-                    b.Navigation("Account");
+                    b.HasOne("s3827202_s3687609_a2.Models.Account", "DestinationAccount")
+                        .WithMany()
+                        .HasForeignKey("DestAccount");
+
+                    b.Navigation("DestinationAccount");
+
+                    b.Navigation("SourceAccount");
                 });
 #pragma warning restore 612, 618
         }
