@@ -1,10 +1,12 @@
-﻿using System;
+﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace s3827202_s3687609_a2.Models
 {
     public class Customer
     {
+        [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int CustomerID { get; set; }
 
         [Required, StringLength(50)]
@@ -20,16 +22,21 @@ namespace s3827202_s3687609_a2.Models
         public string? City { get; set; }
 
         [StringLength(20)]
-        [RegularExpression(@"^[A-Z]{3}\b",ErrorMessage = "Please input the correct state format (e.g VIC QLD)")]
+        [RegularExpression(@"^[A-Z]{3}$", ErrorMessage = "Please input the correct state format (e.g VIC QLD)")]
         public string? State { get; set; }
 
         [StringLength(10)]
-        [RegularExpression(@"\b\d{4}\b", ErrorMessage = "Please input the correct post code format (4 digit post code number)")]
+        [RegularExpression(@"^\d{4}$", ErrorMessage = "Please input the correct post code format (4 digit post code number)")]
         public int? PostCode { get; set; }
 
         [Required, StringLength(15)]
-        [RegularExpression(@"\+61\d{8}\b", ErrorMessage = "Please input the correct phone number format (+61xxxxxxxx)")]
+        [RegularExpression(@"^(\+61\d{8})$", ErrorMessage = "Please input the correct phone number format (+61xxxxxxxx)")]
         public int Phone { get; set; }
+
+        [Required]
+        public int FreeTransactionQuota { get; set; }
+
+        public virtual List<Account> Accounts { get; set; }
     }
     
 }

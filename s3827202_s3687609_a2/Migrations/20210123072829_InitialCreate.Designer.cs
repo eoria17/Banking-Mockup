@@ -10,7 +10,7 @@ using s3827202_s3687609_a2.Data;
 namespace s3827202_s3687609_a2.Migrations
 {
     [DbContext(typeof(BankDBContext))]
-    [Migration("20210120145333_InitialCreate")]
+    [Migration("20210123072829_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -24,13 +24,13 @@ namespace s3827202_s3687609_a2.Migrations
             modelBuilder.Entity("s3827202_s3687609_a2.Models.Account", b =>
                 {
                     b.Property<int>("AccountNumber")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .UseIdentityColumn();
+                        .HasColumnType("int");
 
-                    b.Property<string>("AccountType")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("AccountType")
+                        .HasColumnType("int");
+
+                    b.Property<decimal>("Balance")
+                        .HasColumnType("money");
 
                     b.Property<int>("CustomerID")
                         .HasColumnType("int");
@@ -43,6 +43,8 @@ namespace s3827202_s3687609_a2.Migrations
                     b.HasIndex("CustomerID");
 
                     b.ToTable("Account");
+
+                    b.HasCheckConstraint("CH_Account_Balance", "Balance >= 0");
                 });
 
             modelBuilder.Entity("s3827202_s3687609_a2.Models.BillPay", b =>
@@ -56,7 +58,7 @@ namespace s3827202_s3687609_a2.Migrations
                         .HasColumnType("int");
 
                     b.Property<decimal>("Amount")
-                        .HasColumnType("decimal(18,2)");
+                        .HasColumnType("money");
 
                     b.Property<DateTime>("ModifyDate")
                         .HasColumnType("datetime2");
@@ -64,9 +66,8 @@ namespace s3827202_s3687609_a2.Migrations
                     b.Property<int>("PayeeID")
                         .HasColumnType("int");
 
-                    b.Property<string>("Period")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("Period")
+                        .HasColumnType("int");
 
                     b.Property<DateTime>("ScheduleDate")
                         .HasColumnType("datetime2");
@@ -83,9 +84,7 @@ namespace s3827202_s3687609_a2.Migrations
             modelBuilder.Entity("s3827202_s3687609_a2.Models.Customer", b =>
                 {
                     b.Property<int>("CustomerID")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .UseIdentityColumn();
+                        .HasColumnType("int");
 
                     b.Property<string>("Address")
                         .HasMaxLength(50)
@@ -99,6 +98,9 @@ namespace s3827202_s3687609_a2.Migrations
                         .IsRequired()
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
+
+                    b.Property<int>("FreeTransactionQuota")
+                        .HasColumnType("int");
 
                     b.Property<int>("Phone")
                         .HasMaxLength(15)
@@ -119,6 +121,8 @@ namespace s3827202_s3687609_a2.Migrations
                     b.HasKey("CustomerID");
 
                     b.ToTable("Customer");
+
+                    b.HasCheckConstraint("CH_Transaction_Quota", "FreeTransactionQuota >= 0");
                 });
 
             modelBuilder.Entity("s3827202_s3687609_a2.Models.Login", b =>
@@ -143,6 +147,10 @@ namespace s3827202_s3687609_a2.Migrations
                     b.HasIndex("CustomerID");
 
                     b.ToTable("Login");
+
+                    b.HasCheckConstraint("CH_Login_LoginID", "len(LoginID) = 8");
+
+                    b.HasCheckConstraint("CH_Login_PasswordHash", "len(PasswordHash) = 64");
                 });
 
             modelBuilder.Entity("s3827202_s3687609_a2.Models.Payee", b =>
@@ -174,7 +182,8 @@ namespace s3827202_s3687609_a2.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("State")
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
 
                     b.HasKey("PayeeID");
 
@@ -192,7 +201,7 @@ namespace s3827202_s3687609_a2.Migrations
                         .HasColumnType("int");
 
                     b.Property<decimal?>("Amount")
-                        .HasColumnType("decimal(18,2)");
+                        .HasColumnType("money");
 
                     b.Property<string>("Comment")
                         .HasMaxLength(255)
@@ -216,12 +225,14 @@ namespace s3827202_s3687609_a2.Migrations
                     b.HasIndex("DestAccount");
 
                     b.ToTable("Transaction");
+
+                    b.HasCheckConstraint("CH_Transaction_Amount", "Amount > 0");
                 });
 
             modelBuilder.Entity("s3827202_s3687609_a2.Models.Account", b =>
                 {
                     b.HasOne("s3827202_s3687609_a2.Models.Customer", "Customer")
-                        .WithMany()
+                        .WithMany("Accounts")
                         .HasForeignKey("CustomerID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -262,7 +273,7 @@ namespace s3827202_s3687609_a2.Migrations
             modelBuilder.Entity("s3827202_s3687609_a2.Models.Transaction", b =>
                 {
                     b.HasOne("s3827202_s3687609_a2.Models.Account", "SourceAccount")
-                        .WithMany()
+                        .WithMany("Transactions")
                         .HasForeignKey("AccountNumber")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -274,6 +285,16 @@ namespace s3827202_s3687609_a2.Migrations
                     b.Navigation("DestinationAccount");
 
                     b.Navigation("SourceAccount");
+                });
+
+            modelBuilder.Entity("s3827202_s3687609_a2.Models.Account", b =>
+                {
+                    b.Navigation("Transactions");
+                });
+
+            modelBuilder.Entity("s3827202_s3687609_a2.Models.Customer", b =>
+                {
+                    b.Navigation("Accounts");
                 });
 #pragma warning restore 612, 618
         }

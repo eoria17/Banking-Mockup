@@ -4,6 +4,15 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace s3827202_s3687609_a2.Models
 {
+    public enum TransactionType
+    {
+        Deposit = 1, //Credit
+        Withdrawal = 2, //Debit
+        Transfer = 3, //Debit
+        ServiceCharge = 4, //Debit
+        BillPay = 5 //Debit
+    }
+
     public class Transaction
     {
         public int TransactionID { get; set; }
@@ -20,6 +29,7 @@ namespace s3827202_s3687609_a2.Models
         [ForeignKey("DestAccount")]
         public Account DestinationAccount { get; set; }
 
+        [Column(TypeName = "money")]
         public decimal? Amount { get; set; }
 
         [StringLength(255)]
