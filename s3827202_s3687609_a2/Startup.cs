@@ -22,8 +22,15 @@ namespace s3827202_s3687609_a2
         {
             services.AddControllersWithViews();
 
-            services.AddDbContext<BankDBContext>(options =>
-            options.UseSqlServer(Configuration.GetConnectionString("BankDBContext")));
+            services.AddDbContext<BankDBContext>(options => 
+            {
+
+            options.UseSqlServer(Configuration.GetConnectionString("BankDBContext"));
+
+            // Enable lazy loading.
+            options.UseLazyLoadingProxies();
+            });
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

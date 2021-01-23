@@ -22,7 +22,7 @@ namespace s3827202_s3687609_a2.Models
         public AccountType AccountType { get; set; }
 
         public int CustomerID { get; set; }
-        public Customer Customer { get; set; }
+        public virtual Customer Customer { get; set; }
 
         [Column(TypeName = "money")]
         [DataType(DataType.Currency)]

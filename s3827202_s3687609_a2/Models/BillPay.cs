@@ -17,10 +17,10 @@ namespace s3827202_s3687609_a2.Models
 
         [ForeignKey("Account")]
         public int AccountNumber { get; set; }
-        public Account Account { get; set; }
+        public virtual Account Account { get; set; }
 
         public int PayeeID { get; set; }
-        public Payee Payee { get; set; }
+        public virtual Payee Payee { get; set; }
 
         [Column(TypeName = "money")]
         [DataType(DataType.Currency)]

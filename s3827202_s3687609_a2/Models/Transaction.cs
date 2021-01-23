@@ -23,11 +23,11 @@ namespace s3827202_s3687609_a2.Models
         [Required]
         public int AccountNumber { get; set; }
         [ForeignKey("AccountNumber")]
-        public Account SourceAccount { get; set; }
+        public virtual Account SourceAccount { get; set; }
 
         public int? DestAccount { get; set; }
         [ForeignKey("DestAccount")]
-        public Account DestinationAccount { get; set; }
+        public virtual Account DestinationAccount { get; set; }
 
         [Column(TypeName = "money")]
         public decimal? Amount { get; set; }
