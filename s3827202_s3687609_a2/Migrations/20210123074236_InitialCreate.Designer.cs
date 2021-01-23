@@ -10,7 +10,7 @@ using s3827202_s3687609_a2.Data;
 namespace s3827202_s3687609_a2.Migrations
 {
     [DbContext(typeof(BankDBContext))]
-    [Migration("20210123072829_InitialCreate")]
+    [Migration("20210123074236_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
