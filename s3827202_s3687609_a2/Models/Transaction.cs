@@ -18,7 +18,7 @@ namespace s3827202_s3687609_a2.Models
         public int TransactionID { get; set; }
 
         [Required,StringLength(1)]
-        public string TransactionType { get; set; }
+        public TransactionType TransactionType { get; set; }
 
         [Required]
         public int AccountNumber { get; set; }

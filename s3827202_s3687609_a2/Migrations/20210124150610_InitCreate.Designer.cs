@@ -10,8 +10,8 @@ using s3827202_s3687609_a2.Data;
 namespace s3827202_s3687609_a2.Migrations
 {
     [DbContext(typeof(BankDBContext))]
-    [Migration("20210123074236_InitialCreate")]
-    partial class InitialCreate
+    [Migration("20210124150610_InitCreate")]
+    partial class InitCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -102,13 +102,14 @@ namespace s3827202_s3687609_a2.Migrations
                     b.Property<int>("FreeTransactionQuota")
                         .HasColumnType("int");
 
-                    b.Property<int>("Phone")
+                    b.Property<string>("Phone")
+                        .IsRequired()
                         .HasMaxLength(15)
-                        .HasColumnType("int");
+                        .HasColumnType("nvarchar(15)");
 
-                    b.Property<int?>("PostCode")
+                    b.Property<string>("PostCode")
                         .HasMaxLength(10)
-                        .HasColumnType("int");
+                        .HasColumnType("nvarchar(10)");
 
                     b.Property<string>("State")
                         .HasMaxLength(20)
@@ -213,10 +214,9 @@ namespace s3827202_s3687609_a2.Migrations
                     b.Property<DateTime>("ModifyDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("TransactionType")
-                        .IsRequired()
+                    b.Property<int>("TransactionType")
                         .HasMaxLength(1)
-                        .HasColumnType("nvarchar(1)");
+                        .HasColumnType("int");
 
                     b.HasKey("TransactionID");
 

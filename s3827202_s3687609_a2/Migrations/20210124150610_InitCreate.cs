@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace s3827202_s3687609_a2.Migrations
 {
-    public partial class InitialCreate : Migration
+    public partial class InitCreate : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -17,8 +17,8 @@ namespace s3827202_s3687609_a2.Migrations
                     Address = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true),
                     City = table.Column<string>(type: "nvarchar(40)", maxLength: 40, nullable: true),
                     State = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: true),
-                    PostCode = table.Column<int>(type: "int", maxLength: 10, nullable: true),
-                    Phone = table.Column<int>(type: "int", maxLength: 15, nullable: false),
+                    PostCode = table.Column<string>(type: "nvarchar(10)", maxLength: 10, nullable: true),
+                    Phone = table.Column<string>(type: "nvarchar(15)", maxLength: 15, nullable: false),
                     FreeTransactionQuota = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
@@ -125,7 +125,7 @@ namespace s3827202_s3687609_a2.Migrations
                 {
                     TransactionID = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    TransactionType = table.Column<string>(type: "nvarchar(1)", maxLength: 1, nullable: false),
+                    TransactionType = table.Column<int>(type: "int", maxLength: 1, nullable: false),
                     AccountNumber = table.Column<int>(type: "int", nullable: false),
                     DestAccount = table.Column<int>(type: "int", nullable: true),
                     Amount = table.Column<decimal>(type: "money", nullable: true),

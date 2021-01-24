@@ -27,11 +27,11 @@ namespace s3827202_s3687609_a2.Models
 
         [StringLength(10)]
         [RegularExpression(@"^\d{4}$", ErrorMessage = "Please input the correct post code format (4 digit post code number)")]
-        public int? PostCode { get; set; }
+        public string? PostCode { get; set; }
 
         [Required, StringLength(15)]
         [RegularExpression(@"^(\+61\d{8})$", ErrorMessage = "Please input the correct phone number format (+61xxxxxxxx)")]
-        public int Phone { get; set; }
+        public string Phone { get; set; }
 
         [Required]
         public int FreeTransactionQuota { get; set; }

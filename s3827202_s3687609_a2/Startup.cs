@@ -31,6 +31,14 @@ namespace s3827202_s3687609_a2
             options.UseLazyLoadingProxies();
             });
 
+            // Store session into Web-Server memory.
+            services.AddDistributedMemoryCache();
+            services.AddSession(options =>
+            {
+                // Make the session cookie essential.
+                options.Cookie.IsEssential = true;
+            });
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -44,10 +52,10 @@ namespace s3827202_s3687609_a2
             {
                 app.UseExceptionHandler("/Home/Error");
             }
+            app.UseHttpsRedirection();
             app.UseStaticFiles();
-
+            app.UseSession();
             app.UseRouting();
-
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>

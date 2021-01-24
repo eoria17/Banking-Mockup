@@ -100,13 +100,14 @@ namespace s3827202_s3687609_a2.Migrations
                     b.Property<int>("FreeTransactionQuota")
                         .HasColumnType("int");
 
-                    b.Property<int>("Phone")
+                    b.Property<string>("Phone")
+                        .IsRequired()
                         .HasMaxLength(15)
-                        .HasColumnType("int");
+                        .HasColumnType("nvarchar(15)");
 
-                    b.Property<int?>("PostCode")
+                    b.Property<string>("PostCode")
                         .HasMaxLength(10)
-                        .HasColumnType("int");
+                        .HasColumnType("nvarchar(10)");
 
                     b.Property<string>("State")
                         .HasMaxLength(20)
@@ -211,10 +212,9 @@ namespace s3827202_s3687609_a2.Migrations
                     b.Property<DateTime>("ModifyDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("TransactionType")
-                        .IsRequired()
+                    b.Property<int>("TransactionType")
                         .HasMaxLength(1)
-                        .HasColumnType("nvarchar(1)");
+                        .HasColumnType("int");
 
                     b.HasKey("TransactionID");
 
