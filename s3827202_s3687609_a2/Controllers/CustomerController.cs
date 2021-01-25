@@ -102,5 +102,14 @@ namespace s3827202_s3687609_a2.Controllers
 
             return RedirectToAction(nameof(Index));
         }
+
+        public async Task<IActionResult> Transfer(int id) => View(await _context.Account.FindAsync(id));
+
+        /*[HttpPost]*/
+        /*public async Task<IActionResult> Transfer(int id, decimal amount)
+        {
+
+        }*/
+
     }
 }
