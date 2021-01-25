@@ -35,7 +35,7 @@ namespace s3827202_s3687609_a2.Models
 
         [StringLength(255)]
         public string? Comment { get; set; }
-        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}")]
+
         [DataType(DataType.Date)]
         public DateTime ModifyDate { get; set; }
 
