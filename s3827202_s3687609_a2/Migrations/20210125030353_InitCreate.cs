@@ -18,13 +18,11 @@ namespace s3827202_s3687609_a2.Migrations
                     City = table.Column<string>(type: "nvarchar(40)", maxLength: 40, nullable: true),
                     State = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: true),
                     PostCode = table.Column<string>(type: "nvarchar(10)", maxLength: 10, nullable: true),
-                    Phone = table.Column<string>(type: "nvarchar(15)", maxLength: 15, nullable: false),
-                    FreeTransactionQuota = table.Column<int>(type: "int", nullable: false)
+                    Phone = table.Column<string>(type: "nvarchar(15)", maxLength: 15, nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Customer", x => x.CustomerID);
-                    table.CheckConstraint("CH_Transaction_Quota", "FreeTransactionQuota >= 0");
                 });
 
             migrationBuilder.CreateTable(
@@ -53,12 +51,14 @@ namespace s3827202_s3687609_a2.Migrations
                     AccountType = table.Column<int>(type: "int", nullable: false),
                     CustomerID = table.Column<int>(type: "int", nullable: false),
                     Balance = table.Column<decimal>(type: "money", nullable: false),
-                    ModifyDate = table.Column<DateTime>(type: "datetime2", nullable: false)
+                    ModifyDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    FreeTransaction = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Account", x => x.AccountNumber);
                     table.CheckConstraint("CH_Account_Balance", "Balance >= 0");
+                    table.CheckConstraint("CH_Transaction_Quota", "FreeTransaction >= 0");
                     table.ForeignKey(
                         name: "FK_Account_Customer_CustomerID",
                         column: x => x.CustomerID,

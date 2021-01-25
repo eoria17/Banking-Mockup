@@ -33,9 +33,6 @@ namespace s3827202_s3687609_a2.Models
         [RegularExpression(@"^(\+61\d{8})$", ErrorMessage = "Please input the correct phone number format (+61xxxxxxxx)")]
         public string Phone { get; set; }
 
-        [Required]
-        public int FreeTransactionQuota { get; set; }
-
         public virtual List<Account> Accounts { get; set; }
     }
     

@@ -23,8 +23,7 @@ namespace s3827202_s3687609_a2.Data
                     Address = "123 Fake Street",
                     City = "Melbourne",
                     PostCode = "3000",
-                    Phone = "+6112345678",
-                    FreeTransactionQuota = 4
+                    Phone = "+6112345678"
                 },
                 new Customer
                 {
@@ -33,15 +32,14 @@ namespace s3827202_s3687609_a2.Data
                     Address = "456 Real Road",
                     City = "Melbourne",
                     PostCode = "3005",
-                    Phone = "+6112345678",
-                    FreeTransactionQuota = 4
+                    Phone = "+6112345678"
                 },
                 new Customer
                 {
                     CustomerID = 2300,
                     CustomerName = "Shekhar Kalra",
-                    Phone = "+6112345678",
-                    FreeTransactionQuota = 4
+                    Phone = "+6112345678"
+                    
                 });
 
             context.Login.AddRange(
@@ -70,6 +68,7 @@ namespace s3827202_s3687609_a2.Data
                     AccountNumber = 4100,
                     AccountType = AccountType.Saving,
                     CustomerID = 2100,
+                    FreeTransaction = 4,
                     Balance = 500
                 },
                 new Account
@@ -77,6 +76,7 @@ namespace s3827202_s3687609_a2.Data
                     AccountNumber = 4101,
                     AccountType = AccountType.Checking,
                     CustomerID = 2100,
+                    FreeTransaction = 4,
                     Balance = 500
                 },
                 new Account
@@ -84,6 +84,7 @@ namespace s3827202_s3687609_a2.Data
                     AccountNumber = 4200,
                     AccountType = AccountType.Saving,
                     CustomerID = 2200,
+                    FreeTransaction = 4,
                     Balance = 500.95m
                 },
                 new Account
@@ -91,6 +92,7 @@ namespace s3827202_s3687609_a2.Data
                     AccountNumber = 4300,
                     AccountType = AccountType.Checking,
                     CustomerID = 2300,
+                    FreeTransaction = 4,
                     Balance = 1250.50m
                 });
 

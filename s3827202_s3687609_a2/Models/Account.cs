@@ -32,6 +32,10 @@ namespace s3827202_s3687609_a2.Models
         [Required]
         public DateTime ModifyDate { get; set; }
 
+        [Required]
+        [Display(Name = "Free Transaction")]
+        public int FreeTransaction { get; set; }
+
         public virtual List<Transaction> Transactions { get; set; }
     }
 }

@@ -25,9 +25,8 @@ namespace s3827202_s3687609_a2.Data
             builder.Entity<Login>().HasCheckConstraint("CH_Login_LoginID", "len(LoginID) = 8").
                 HasCheckConstraint("CH_Login_PasswordHash", "len(PasswordHash) = 64");
 
-            builder.Entity<Account>().HasCheckConstraint("CH_Account_Balance", "Balance >= 0");
-
-            builder.Entity<Customer>().HasCheckConstraint("CH_Transaction_Quota", "FreeTransactionQuota >= 0");
+            builder.Entity<Account>().HasCheckConstraint("CH_Account_Balance", "Balance >= 0").
+                HasCheckConstraint("CH_Transaction_Quota", "FreeTransaction >= 0"); ;
 
             builder.Entity<Transaction>().HasOne(x => x.SourceAccount).WithMany(x => x.Transactions).HasForeignKey(x => x.AccountNumber);
             builder.Entity<Transaction>().HasCheckConstraint("CH_Transaction_Amount", "Amount > 0");

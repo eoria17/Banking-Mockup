@@ -33,6 +33,9 @@ namespace s3827202_s3687609_a2.Migrations
                     b.Property<int>("CustomerID")
                         .HasColumnType("int");
 
+                    b.Property<int>("FreeTransaction")
+                        .HasColumnType("int");
+
                     b.Property<DateTime>("ModifyDate")
                         .HasColumnType("datetime2");
 
@@ -43,6 +46,8 @@ namespace s3827202_s3687609_a2.Migrations
                     b.ToTable("Account");
 
                     b.HasCheckConstraint("CH_Account_Balance", "Balance >= 0");
+
+                    b.HasCheckConstraint("CH_Transaction_Quota", "FreeTransaction >= 0");
                 });
 
             modelBuilder.Entity("s3827202_s3687609_a2.Models.BillPay", b =>
@@ -97,9 +102,6 @@ namespace s3827202_s3687609_a2.Migrations
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
-                    b.Property<int>("FreeTransactionQuota")
-                        .HasColumnType("int");
-
                     b.Property<string>("Phone")
                         .IsRequired()
                         .HasMaxLength(15)
@@ -120,8 +122,6 @@ namespace s3827202_s3687609_a2.Migrations
                     b.HasKey("CustomerID");
 
                     b.ToTable("Customer");
-
-                    b.HasCheckConstraint("CH_Transaction_Quota", "FreeTransactionQuota >= 0");
                 });
 
             modelBuilder.Entity("s3827202_s3687609_a2.Models.Login", b =>
