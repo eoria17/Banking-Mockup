@@ -9,14 +9,11 @@ using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
 using s3827202_s3687609_a2.Common;
 using s3827202_s3687609_a2.Data;
-using s3827202_s3687609_a2.Filters;
 using s3827202_s3687609_a2.Models;
-using s3827202_s3687609_a2.Filters;
 
 
 namespace s3827202_s3687609_a2.Controllers
 {
-    [AuthorizeCustomer]
     public class StatementController : Controller
     {
         private readonly BankDBContext _context;
