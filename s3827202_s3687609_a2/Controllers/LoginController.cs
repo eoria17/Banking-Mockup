@@ -7,6 +7,7 @@ using s3827202_s3687609_a2.Models;
 
 namespace s3827202_s3687609_a2.Controllers
 {
+    [Route("/Mcba/Login")]
     public class LoginController : Controller
     {
         private readonly BankDBContext _context;

@@ -14,7 +14,6 @@ namespace s3827202_s3687609_a2.Controllers
     {
         private readonly BankDBContext _context;
 
-        // ReSharper disable once PossibleInvalidOperationException
         private int CustomerID => HttpContext.Session.GetInt32(nameof(Customer.CustomerID)).Value;
 
         public CustomerController(BankDBContext context) => _context = context;
@@ -102,5 +101,14 @@ namespace s3827202_s3687609_a2.Controllers
 
             return RedirectToAction(nameof(Index));
         }
+
+        public async Task<IActionResult> Transfer(int id) => View(await _context.Account.FindAsync(id));
+
+        /*[HttpPost]*/
+        /*public async Task<IActionResult> Transfer(int id, decimal amount)
+        {
+
+        }*/
+
     }
 }
