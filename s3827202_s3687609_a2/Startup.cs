@@ -5,6 +5,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.EntityFrameworkCore;
 using s3827202_s3687609_a2.Data;
+using s3827202_s3687609_a2.BackgroundJob;
 
 namespace s3827202_s3687609_a2
 {
@@ -20,6 +21,7 @@ namespace s3827202_s3687609_a2
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddHostedService<BillPayServices>();
             services.AddControllersWithViews();
 
             services.AddDbContext<BankDBContext>(options => 

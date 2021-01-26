@@ -9,7 +9,7 @@
         <div class="form-actions no-color">
             <p>
                Account Type：               
-                    <select id="accountType">
+                    <select id="AccountType" name="AccountType" value="@ViewData["AccountType"]">
                         <option value="1">Checking</option>
                         <option value="2">Saving</option>
                     </select>               
@@ -17,7 +17,7 @@
                 <input type="submit" value="Search"  id="sub" class="btn btn-default" />
             </p>
         </div>
-        <p>My Blance:<span id="blance"></span></p>
+        <p>My Blance:$<span id="blance"></span></p>
     </form>
 
     <table class="table">
@@ -69,7 +69,7 @@
                         @Html.DisplayFor(modelItem => item.Comment)
                     </td>
                     <td>
-                        @Html.DisplayFor(modelItem => item.ModifyDate)
+                        @Html.DisplayFor(modelItem =>  item.ModifyDate)
                     </td>
                 </tr>
             }
@@ -88,6 +88,7 @@
        asp-route-sortOrder="@ViewData["CurrentSort"]"
        asp-route-pageNumber="@(Model.PageIndex - 1)"
        asp-route-AccountNumber="@ViewData["AccountNumber"]"
+       asp-route-AccountType="@ViewData["AccountType"]"
        class="btn btn-default @prevDisabled">
         Previous
     </a>
@@ -95,6 +96,7 @@
        asp-route-sortOrder="@ViewData["CurrentSort"]"
        asp-route-pageNumber="@(Model.PageIndex + 1)"
        asp-route-AccountNumber="@ViewData["AccountNumber"]"
+       asp-route-AccountType="@ViewData["AccountType"]"
        class="btn btn-default @nextDisabled">
         Next
     </a>
@@ -113,8 +115,9 @@
                 alert("There is no account under this type");
             }
             var para = getQueryString('AccountNumber');
+            var para1 = getQueryString('AccountType');
             if (para == "") {
-                var v1 = $("#accountType").val();
+                var v1 = 1;
                 $.ajax({
                     url: "/Statement/GetAccounts",
                     type: 'GET',
@@ -138,7 +141,9 @@
                 })
             }
             else {
-                var v1 = $("#accountType").val();
+                
+                var v1 = para1;
+                $("#AccountType").val(v1);
                 $.ajax({
                     url: "/Statement/GetAccounts",
                     type: 'GET',
@@ -170,12 +175,14 @@
             
             
         })
-        $("#sub").click(function () {
+        $("#sub").click(function () {   
+            alert($("#AccountType option:selected").val());
             $("#AccountNumber").val($("#AccountNumber option:selected").val());
+            $("#AccountType").val($("#AccountType option:selected").val());
            
         })
-        $("#accountType").change(function (e) {
-            var v1 = $("#accountType").val();           
+        $("#AccountType").change(function (e) {
+            var v1 = $("#AccountType").val();           
             $.ajax({
                 url: "/Statement/GetAccounts",
                 type: 'GET',
