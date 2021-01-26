@@ -34,7 +34,6 @@ namespace s3827202_s3687609_a2.BackgroundJob
             using var scope = _services.CreateScope();
             var context = scope.ServiceProvider.GetRequiredService<BankDBContext>();
 
-            // Get all the data of the transfer date earlier than the next day
             List<BillPay> list = await context.BillPay.Where(a => a.ScheduleDate <= DateTime.Now).Include(a => a.Account).Include(a => a.Payee).ToListAsync(cancellationToken);
             var datenow = Convert.ToDateTime(DateTime.Now.ToString("yyyy-MM-dd"));
             if (list.Count <= 0)
@@ -115,16 +114,7 @@ namespace s3827202_s3687609_a2.BackgroundJob
                         }
                         else
                         {
-                            var date = item.ScheduleDate;
-                            while (true)
-                            {
-                                date = date.AddMonths(3);
-                                if (date >= datenow)
-                                {
-                                    break;
-                                }
-                            }
-                            if (date == datenow)
+                            if (item.ScheduleDate.AddDays(90) == datenow)
                             {
                                 var count = context.Transaction.Where(x => x.AccountNumber == item.AccountNumber && x.TransactionType == TransactionType.Withdrawal && x.Amount == item.Amount && x.ModifyDate == datenow).Count();
                                 if (count > 0)
@@ -201,16 +191,7 @@ namespace s3827202_s3687609_a2.BackgroundJob
                         }
                         else if (item.Period == Period.Monhly)
                         {
-                            var date = item.ScheduleDate;
-                            while (true)
-                            {
-                                date = date.AddMonths(1);
-                                if (date >= datenow)
-                                {
-                                    break;
-                                }
-                            }
-                            if (date == datenow)
+                            if (item.ScheduleDate.AddDays(30) == datenow)
                             {
                                 var count = context.Transaction.Where(x => x.AccountNumber == item.AccountNumber && x.TransactionType == TransactionType.Withdrawal && x.Amount == item.Amount && x.ModifyDate == datenow).Count();
                                 if (count > 0)
@@ -248,16 +229,7 @@ namespace s3827202_s3687609_a2.BackgroundJob
                         }
                         else
                         {
-                            var date = item.ScheduleDate;
-                            while (true)
-                            {
-                                date = date.AddMonths(3);
-                                if (date >= datenow)
-                                {
-                                    break;
-                                }
-                            }
-                            if (date == datenow)
+                            if (item.ScheduleDate.AddDays(90) == datenow)
                             {
                                 var count = context.Transaction.Where(x => x.AccountNumber == item.AccountNumber && x.TransactionType == TransactionType.Withdrawal && x.Amount == item.Amount && x.ModifyDate == datenow).Count();
                                 if (count > 0)

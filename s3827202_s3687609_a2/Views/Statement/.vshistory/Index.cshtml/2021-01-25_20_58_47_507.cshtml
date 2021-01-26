@@ -17,7 +17,7 @@
                 <input type="submit" value="Search"  id="sub" class="btn btn-default" />
             </p>
         </div>
-        <p>My Balance:$<span id="balance"></span></p>
+        <p>My Blance:$<span id="blance"></span></p>
     </form>
 
     <table class="table">
@@ -132,7 +132,7 @@
                             str += "<option value=" + data[i].AccountNumber + ">" + data[i].AccountNumber + "</option>"
                         }
                         $("#AccountNumber").html(str);
-                        $("#balance").html("");
+                        $("#blance").html(data[0].Balance);
 
                     }, error: function () {
                         alert("data error");
@@ -162,7 +162,7 @@
                        
                         for (i = 0; i < data.length; i++) {
                             if (data[i].AccountNumber == para) {
-                                $("#balance").html(data[i].Balance);
+                                $("#blance").html(data[i].Balance);
                                 $("#AccountNumber").val(data[i].AccountNumber);
                             }
                         }
@@ -175,7 +175,8 @@
             
             
         })
-        $("#sub").click(function () {              
+        $("#sub").click(function () {   
+            alert($("#AccountType option:selected").val());
             $("#AccountNumber").val($("#AccountNumber option:selected").val());
             $("#AccountType").val($("#AccountType option:selected").val());
            
@@ -196,7 +197,7 @@
                         str += "<option value=" + data[i].AccountNumber + ">" + data[i].AccountNumber + "</option>"                           
                     }
                     $("#AccountNumber").html(str);
-                    $("#balance").html("");
+                    $("#blance").html(data[0].Balance);
                 }, error: function () {
                     alert("data error");
                 }
