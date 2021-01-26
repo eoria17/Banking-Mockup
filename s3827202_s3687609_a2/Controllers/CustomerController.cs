@@ -14,7 +14,6 @@ namespace s3827202_s3687609_a2.Controllers
     {
         private readonly BankDBContext _context;
 
-        // ReSharper disable once PossibleInvalidOperationException
         private int CustomerID => HttpContext.Session.GetInt32(nameof(Customer.CustomerID)).Value;
 
         public CustomerController(BankDBContext context) => _context = context;
