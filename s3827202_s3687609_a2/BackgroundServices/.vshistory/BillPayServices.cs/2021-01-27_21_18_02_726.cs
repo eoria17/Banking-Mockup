@@ -71,7 +71,7 @@ namespace s3827202_s3687609_a2.BackgroundJob
                                     await context.SaveChangesAsync();
                                     item.Account.Balance = item.Account.Balance - item.Amount;
                                     item.Account.FreeTransaction = item.Account.FreeTransaction - 1;
-                                    context.Account.Update(item.Account);
+                                    context.Account.Update(item.Account);  
                                     item.Status = BillPayStatus.Done;
                                     context.BillPay.Update(item);
                                     await context.SaveChangesAsync();
@@ -152,29 +152,6 @@ namespace s3827202_s3687609_a2.BackgroundJob
                                     await context.SaveChangesAsync();
                                 }
                             }
-                        }
-                    }
-                    else {
-                        var count = context.Transaction.Where(x => x.AccountNumber == item.AccountNumber && x.TransactionType == TransactionType.BillPay && x.Amount == item.Amount && x.ModifyDate == datenow).Count();
-                        if (count > 0)
-                        {
-                            //pay over
-                        }
-                        else
-                        {
-                            Transaction transaction = new Transaction()
-                            {
-                                TransactionType = TransactionType.BillPay,
-                                AccountNumber = item.AccountNumber,
-                                Amount = item.Amount,
-                                Comment = "Not enough money",
-                                ModifyDate = datenow
-                            };
-                            context.Transaction.Add(transaction);
-                            await context.SaveChangesAsync();
-                            item.Status = BillPayStatus.Failed;
-                            context.Account.Update(item.Account);
-                            await context.SaveChangesAsync();
                         }
                     }
                    
@@ -321,27 +298,6 @@ namespace s3827202_s3687609_a2.BackgroundJob
                     else
                     {
                         //Not Enough Money 
-                        var count = context.Transaction.Where(x => x.AccountNumber == item.AccountNumber && x.TransactionType == TransactionType.BillPay && x.Amount == item.Amount && x.ModifyDate == datenow).Count();
-                        if (count > 0)
-                        {
-                            //pay over
-                        }
-                        else
-                        {
-                            Transaction transaction = new Transaction()
-                            {
-                                TransactionType = TransactionType.BillPay,
-                                AccountNumber = item.AccountNumber,
-                                Amount = item.Amount,
-                                Comment = "Not enough money",
-                                ModifyDate = datenow
-                            };
-                            context.Transaction.Add(transaction);
-                            await context.SaveChangesAsync();
-                            item.Status = BillPayStatus.Failed;
-                            context.Account.Update(item.Account);
-                            await context.SaveChangesAsync();
-                        }
                     }
                 }
             }
