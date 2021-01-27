@@ -75,6 +75,9 @@ namespace s3827202_s3687609_a2.Migrations
                     b.Property<DateTime>("ScheduleDate")
                         .HasColumnType("datetime2");
 
+                    b.Property<int>("Status")
+                        .HasColumnType("int");
+
                     b.HasKey("BillPayID");
 
                     b.HasIndex("AccountNumber");
@@ -114,6 +117,9 @@ namespace s3827202_s3687609_a2.Migrations
                     b.Property<string>("State")
                         .HasMaxLength(20)
                         .HasColumnType("nvarchar(20)");
+
+                    b.Property<int>("Status")
+                        .HasColumnType("int");
 
                     b.Property<string>("TFN")
                         .HasMaxLength(11)
@@ -184,9 +190,6 @@ namespace s3827202_s3687609_a2.Migrations
                     b.Property<string>("State")
                         .HasMaxLength(20)
                         .HasColumnType("nvarchar(20)");
-
-                    b.Property<int>("Status")
-                        .HasColumnType("int");
 
                     b.HasKey("PayeeID");
 

@@ -23,7 +23,8 @@ namespace s3827202_s3687609_a2.Data
                     Address = "123 Fake Street",
                     City = "Melbourne",
                     PostCode = "3000",
-                    Phone = "+6112345678"
+                    Phone = "+6112345678",
+                    Status = CustomerStatus.Unlocked
                 },
                 new Customer
                 {
@@ -32,14 +33,16 @@ namespace s3827202_s3687609_a2.Data
                     Address = "456 Real Road",
                     City = "Melbourne",
                     PostCode = "3005",
-                    Phone = "+6112345678"
+                    Phone = "+6112345678",
+                    Status = CustomerStatus.Unlocked
                 },
                 new Customer
                 {
                     CustomerID = 2300,
                     CustomerName = "Shekhar Kalra",
-                    Phone = "+6112345678"
-                    
+                    Phone = "+6112345678",
+                    Status = CustomerStatus.Unlocked
+
                 });
 
             context.Login.AddRange(
