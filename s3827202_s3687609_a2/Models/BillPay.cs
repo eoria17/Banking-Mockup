@@ -23,9 +23,11 @@ namespace s3827202_s3687609_a2.Models
         public int BillPayID { get; set; }
 
         [ForeignKey("Account")]
+        [Display(Name = "Account Number")]
         public int AccountNumber { get; set; }
         public virtual Account Account { get; set; }
 
+        [Display(Name = "ID")]
         public int PayeeID { get; set; }
         public virtual Payee Payee { get; set; }
 
@@ -34,7 +36,10 @@ namespace s3827202_s3687609_a2.Models
         [Required]
         public decimal Amount { get; set; }
 
+        [Display(Name = "Scheduled Date")]
         [Required]
+        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}")]
+        [DataType(DataType.Date)]
         public DateTime ScheduleDate { get; set; }
 
         [Required]

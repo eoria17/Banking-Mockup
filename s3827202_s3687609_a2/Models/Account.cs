@@ -37,5 +37,7 @@ namespace s3827202_s3687609_a2.Models
         public int FreeTransaction { get; set; }
 
         public virtual List<Transaction> Transactions { get; set; }
+
+        public virtual List<BillPay> BillPays { get; set; }
     }
 }

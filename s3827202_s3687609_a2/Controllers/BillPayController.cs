@@ -22,7 +22,11 @@ namespace s3827202_s3687609_a2.Controllers
         } 
         public IActionResult Index()
         {
-            return View();
+            var billPays = _context.Account.
+                Where(x => x.CustomerID == CustomerID).
+                Select(x => x.BillPays).SelectMany(x => x).ToList();
+
+            return View(billPays);
         }
         // GET: BillPay/Create
         public IActionResult Create()

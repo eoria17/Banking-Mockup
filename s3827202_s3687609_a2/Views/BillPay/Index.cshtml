@@ -1,6 +1,38 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
-@{
+﻿@model List<BillPay>
+@{ 
+    ViewData["Title"] = "Bill Pay";
 }
-<a asp-action="Create">Create BillPay</a>
+
+<h1 class="display-4">Bill Pay</h1>
+<a asp-action="Create" class="btn btn-primary">Create BillPay</a>
+<br />
+<br />
+
+<table class="table">
+    <tr>
+        <th>@Html.DisplayNameFor(model => model[0].AccountNumber)</th>
+        <th>@Html.DisplayNameFor(model => model[0].PayeeID)</th>
+        <th>@Html.DisplayNameFor(model => model[0].Amount)</th>
+        <th>@Html.DisplayNameFor(model => model[0].ScheduleDate)</th>
+        <th>@Html.DisplayNameFor(model => model[0].Period)</th>
+        <th>@Html.DisplayNameFor(model => model[0].Status)</th>
+        <th>Action</th>
+    </tr>
+    @foreach (var item in Model)
+    {
+<tr>
+    <td>@Html.DisplayFor(x => item.AccountNumber)</td>
+    <td>@Html.DisplayFor(x => item.PayeeID)</td>
+    <td>@Html.DisplayFor(x => item.Amount)</td>
+    <td>@Html.DisplayFor(x => item.ScheduleDate)</td>
+    <td>@Html.DisplayFor(x => item.Period)</td>
+    <td>@Html.DisplayFor(x => item.Status)</td>
+    <td>
+        @if (item.Status != BillPayStatus.Done)
+        {
+            <a asp-action="Modify" class="btn btn-primary" asp-route-id="@item.BillPayID" hidden="">Modify</a>
+        }
+    </td>
+</tr>
+    }
+</table>
