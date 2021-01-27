@@ -95,6 +95,7 @@ namespace s3827202_s3687609_a2.Controllers
             if (transactionTypeVM == TransactionTypeVM.Deposit)
             {
                 account.Balance += amount;
+                account.ModifyDate = DateTime.UtcNow;
                 account.Transactions.Add(
                     new Transaction
                     {
@@ -112,6 +113,7 @@ namespace s3827202_s3687609_a2.Controllers
             else if (transactionTypeVM == TransactionTypeVM.Withdrawal)
             {
                 account.Balance -= amount + serviceCharge;
+                account.ModifyDate = DateTime.UtcNow;
                 account.FreeTransaction = account.FreeTransaction > 0 ? account.FreeTransaction - 1 : account.FreeTransaction;
                 account.Transactions.Add(
                     new Transaction
@@ -140,6 +142,7 @@ namespace s3827202_s3687609_a2.Controllers
             else if (transactionTypeVM == TransactionTypeVM.Transfer)
             {
                 account.Balance -= amount + serviceCharge;
+                account.ModifyDate = DateTime.UtcNow;
                 account.FreeTransaction = account.FreeTransaction > 0 ? account.FreeTransaction - 1 : account.FreeTransaction;
                 account.Transactions.Add(
                     new Transaction
@@ -163,6 +166,7 @@ namespace s3827202_s3687609_a2.Controllers
                 var destinationAccount = await _context.Account.FindAsync(destAccount);
 
                 destinationAccount.Balance += amount;
+                destinationAccount.ModifyDate = DateTime.UtcNow;
                 destinationAccount.Transactions.Add(
                     new Transaction
                     {
