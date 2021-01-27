@@ -11,7 +11,7 @@
 <table class="table">
     <tr>
         <th>@Html.DisplayNameFor(model => model[0].AccountNumber)</th>
-        <th>@Html.DisplayNameFor(model => model[0].PayeeID)</th>
+        <th>@Html.DisplayNameFor(model => model[0].Payee.PayeeName)</th>
         <th>@Html.DisplayNameFor(model => model[0].Amount)</th>
         <th>@Html.DisplayNameFor(model => model[0].ScheduleDate)</th>
         <th>@Html.DisplayNameFor(model => model[0].Period)</th>
@@ -22,15 +22,15 @@
     {
 <tr>
     <td>@Html.DisplayFor(x => item.AccountNumber)</td>
-    <td>@Html.DisplayFor(x => item.PayeeID)</td>
+    <td>@Html.DisplayFor(x => item.Payee.PayeeName)</td>
     <td>@Html.DisplayFor(x => item.Amount)</td>
     <td>@Html.DisplayFor(x => item.ScheduleDate)</td>
     <td>@Html.DisplayFor(x => item.Period)</td>
     <td>@Html.DisplayFor(x => item.Status)</td>
     <td>
-        @if (item.Status != BillPayStatus.Done)
+        @if (item.Status == BillPayStatus.Available)
         {
-            <a asp-action="Modify" class="btn btn-primary" asp-route-id="@item.BillPayID" hidden="">Modify</a>
+            <a asp-action="Modify" class="btn btn-primary" asp-route-id="@item.BillPayID">Modify</a>
         }
     </td>
 </tr>

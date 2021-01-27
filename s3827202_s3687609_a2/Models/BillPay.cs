@@ -27,7 +27,7 @@ namespace s3827202_s3687609_a2.Models
         public int AccountNumber { get; set; }
         public virtual Account Account { get; set; }
 
-        [Display(Name = "ID")]
+        [Display(Name = "Payee ID")]
         public int PayeeID { get; set; }
         public virtual Payee Payee { get; set; }
 
