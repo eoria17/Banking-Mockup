@@ -22,11 +22,7 @@ namespace s3827202_s3687609_a2.Controllers
         } 
         public IActionResult Index()
         {
-            var billPays = _context.Account.
-                Where(x => x.CustomerID == CustomerID).
-                Select(x => x.BillPays).SelectMany(x => x).ToList();
-
-            return View(billPays);
+            return View();
         }
         // GET: BillPay/Create
         public IActionResult Create()
@@ -42,7 +38,6 @@ namespace s3827202_s3687609_a2.Controllers
             if (ModelState.IsValid)
             {
                 billPay.ModifyDate = DateTime.UtcNow;
-                billPay.Status = BillPayStatus.Available;
                 _context.Add(billPay);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));

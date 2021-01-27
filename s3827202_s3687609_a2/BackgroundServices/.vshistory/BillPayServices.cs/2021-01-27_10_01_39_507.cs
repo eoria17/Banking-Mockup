@@ -197,8 +197,6 @@ namespace s3827202_s3687609_a2.BackgroundJob
                                     await context.SaveChangesAsync();
                                     item.Account.Balance = item.Account.Balance - item.Amount - decimal.Parse(ServiceChargeAmount.ToString());
                                     context.Account.Update(item.Account);
-                                    item.Status = BillPayStatus.Done;
-                                    context.BillPay.Update(item);
                                     await context.SaveChangesAsync();
                                 }
                             }
