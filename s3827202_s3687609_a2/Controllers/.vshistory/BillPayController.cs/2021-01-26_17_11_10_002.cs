@@ -38,7 +38,6 @@ namespace s3827202_s3687609_a2.Controllers
             if (ModelState.IsValid)
             {
                 billPay.ModifyDate = DateTime.UtcNow;
-                billPay.Status = BillPayStatus.Available;
                 _context.Add(billPay);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));

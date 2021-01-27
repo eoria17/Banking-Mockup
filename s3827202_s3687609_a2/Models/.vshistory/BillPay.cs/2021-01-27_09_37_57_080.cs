@@ -44,6 +44,6 @@ namespace s3827202_s3687609_a2.Models
         public DateTime ModifyDate { get; set; }
 
         [Required]
-        public BillPayStatus Status { get; set; } 
+        public BillPayStatus Status { get; set; } //locked or unlocked
     }
 }

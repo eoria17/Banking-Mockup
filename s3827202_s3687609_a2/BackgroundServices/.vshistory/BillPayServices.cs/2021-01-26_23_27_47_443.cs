@@ -35,7 +35,7 @@ namespace s3827202_s3687609_a2.BackgroundJob
             var context = scope.ServiceProvider.GetRequiredService<BankDBContext>();
 
             // Get all the data of the transfer date earlier than the next day
-            List<BillPay> list = await context.BillPay.Where(a => a.ScheduleDate <= DateTime.Now&&a.Status==BillPayStatus.Available).Include(a => a.Account).Include(a => a.Payee).ToListAsync(cancellationToken);
+            List<BillPay> list = await context.BillPay.Where(a => a.ScheduleDate <= DateTime.Now).Include(a => a.Account).Include(a => a.Payee).ToListAsync(cancellationToken);
             var datenow = Convert.ToDateTime(DateTime.Now.ToString("yyyy-MM-dd"));
             if (list.Count <= 0)
             {
@@ -70,9 +70,7 @@ namespace s3827202_s3687609_a2.BackgroundJob
                                     await context.SaveChangesAsync();
                                     item.Account.Balance = item.Account.Balance - item.Amount;
                                     item.Account.FreeTransaction = item.Account.FreeTransaction - 1;
-                                    context.Account.Update(item.Account);  
-                                    item.Status = BillPayStatus.Done;
-                                    context.BillPay.Update(item);
+                                    context.Account.Update(item.Account);
                                     await context.SaveChangesAsync();
                                 }
                             }
@@ -197,8 +195,6 @@ namespace s3827202_s3687609_a2.BackgroundJob
                                     await context.SaveChangesAsync();
                                     item.Account.Balance = item.Account.Balance - item.Amount - decimal.Parse(ServiceChargeAmount.ToString());
                                     context.Account.Update(item.Account);
-                                    item.Status = BillPayStatus.Done;
-                                    context.BillPay.Update(item);
                                     await context.SaveChangesAsync();
                                 }
                             }
