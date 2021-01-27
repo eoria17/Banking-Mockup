@@ -20,7 +20,9 @@
             </div>
             <div class="form-group">
                 <label asp-for="DestAccount" class="form-control-label"></label>
-                <select asp-for="DestAccount" class="form-control selectpicker bs-select-hidden" asp-items="Model.SourceAccounts"></select>
+                <select asp-for="DestAccount" class="form-control selectpicker bs-select-hidden" asp-items="Model.DestinationAccounts">
+                    <option value="" selected></option>
+                </select>
                 <span asp-validation-for="DestAccount" class="text-danger"></span>
             </div>
             <div class="form-group">

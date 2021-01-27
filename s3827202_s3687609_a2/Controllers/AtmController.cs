@@ -30,11 +30,19 @@ namespace s3827202_s3687609_a2.Controllers
                     Value = x.AccountNumber.ToString()
                 }).
                 ToList();
- 
-        
+
+            var destAccounts = _context.Account.
+                Select(x => new SelectListItem()
+            {
+                Text = x.AccountNumber.ToString(),
+                Value = x.AccountNumber.ToString()
+            }).ToList();
+
+
             var AtmTransModel = new AtmTransactionViewModel()
             {
-                SourceAccounts = sourceAccounts
+                SourceAccounts = sourceAccounts,
+                DestinationAccounts = destAccounts
             };
 
             return View(AtmTransModel);
@@ -52,6 +60,8 @@ namespace s3827202_s3687609_a2.Controllers
                 ModelState.AddModelError(nameof(amount), "Amount cannot have more than 2 decimal places.");
             if (transactionTypeVM == TransactionTypeVM.Transfer && destAccount == sourceAccount)
                 ModelState.AddModelError(nameof(destAccount), "Cannot transfer to the same account");
+            if (transactionTypeVM == TransactionTypeVM.Transfer && destAccount == null)
+                ModelState.AddModelError(nameof(destAccount), "Please select a destination account");
             if (transactionTypeVM == TransactionTypeVM.Withdrawal && account.Balance - (amount + serviceCharge) < 0.0m)
                 ModelState.AddModelError(nameof(amount), "Insufficient balance.");
             if (!ModelState.IsValid)
@@ -65,9 +75,18 @@ namespace s3827202_s3687609_a2.Controllers
                 ToList();
 
 
+                var destAccounts = _context.Account.
+                Select(x => new SelectListItem()
+                {
+                    Text = x.AccountNumber.ToString(),
+                    Value = x.AccountNumber.ToString()
+                }).ToList();
+
+
                 var AtmTransModel = new AtmTransactionViewModel()
                 {
-                    SourceAccounts = sourceAccounts
+                    SourceAccounts = sourceAccounts,
+                    DestinationAccounts = destAccounts
                 };
 
                 return View(AtmTransModel);

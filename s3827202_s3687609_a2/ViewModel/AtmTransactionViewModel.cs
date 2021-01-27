@@ -18,6 +18,9 @@ namespace s3827202_s3687609_a2.ViewModel
         [Display(Name = "Source Accounts")]
         public List<SelectListItem> SourceAccounts { get; set; }
 
+        [Display(Name = "Destination Accounts")]
+        public List<SelectListItem> DestinationAccounts { get; set; }
+
         [Display(Name = "Transaction Type")]
         public TransactionTypeVM TransactionTypeVM { get; set; }
 
