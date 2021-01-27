@@ -1,5 +1,4 @@
-﻿using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using s3827202_s3687609_a2.Data;
@@ -52,7 +51,7 @@ namespace s3827202_s3687609_a2.BackgroundJob
                         {
                             if (datenow == item.ScheduleDate)
                             {
-                                var count = context.Transaction.Where(x => x.AccountNumber == item.AccountNumber && x.TransactionType == TransactionType.BillPay && x.Amount == item.Amount && x.ModifyDate == datenow).Count();
+                                var count = context.Transaction.Where(x => x.AccountNumber == item.AccountNumber && x.TransactionType == TransactionType.Withdrawal && x.Amount == item.Amount && x.ModifyDate == datenow).Count();
                                 if (count > 0)
                                 {
                                     //pay over
@@ -61,10 +60,10 @@ namespace s3827202_s3687609_a2.BackgroundJob
                                 {
                                     Transaction transaction = new Transaction()
                                     {
-                                        TransactionType = TransactionType.BillPay,
+                                        TransactionType = TransactionType.Withdrawal,
                                         AccountNumber = item.AccountNumber,
                                         Amount = item.Amount,
-                                        Comment = "Bill pay",
+                                        Comment = "Transfer",
                                         ModifyDate = datenow
                                     };
                                     context.Transaction.Add(transaction);
@@ -91,7 +90,7 @@ namespace s3827202_s3687609_a2.BackgroundJob
                             }
                             if (date == datenow)
                             {
-                                var count = context.Transaction.Where(x => x.AccountNumber == item.AccountNumber && x.TransactionType == TransactionType.BillPay && x.Amount == item.Amount && x.ModifyDate == datenow).Count();
+                                var count = context.Transaction.Where(x => x.AccountNumber == item.AccountNumber && x.TransactionType == TransactionType.Withdrawal && x.Amount == item.Amount && x.ModifyDate == datenow).Count();
                                 if (count > 0)
                                 {
                                     //pay over
@@ -100,10 +99,10 @@ namespace s3827202_s3687609_a2.BackgroundJob
                                 {
                                     Transaction transaction = new Transaction()
                                     {
-                                        TransactionType = TransactionType.BillPay,
+                                        TransactionType = TransactionType.Withdrawal,
                                         AccountNumber = item.AccountNumber,
                                         Amount = item.Amount,
-                                        Comment = "Bill pay",
+                                        Comment = "Transfer",
                                         ModifyDate = datenow
                                     };
                                     context.Transaction.Add(transaction);
@@ -129,7 +128,7 @@ namespace s3827202_s3687609_a2.BackgroundJob
                             }
                             if (date == datenow)
                             {
-                                var count = context.Transaction.Where(x => x.AccountNumber == item.AccountNumber && x.TransactionType == TransactionType.BillPay && x.Amount == item.Amount && x.ModifyDate == datenow).Count();
+                                var count = context.Transaction.Where(x => x.AccountNumber == item.AccountNumber && x.TransactionType == TransactionType.Withdrawal && x.Amount == item.Amount && x.ModifyDate == datenow).Count();
                                 if (count > 0)
                                 {
                                     //pay over
@@ -138,10 +137,10 @@ namespace s3827202_s3687609_a2.BackgroundJob
                                 {
                                     Transaction transaction = new Transaction()
                                     {
-                                        TransactionType = TransactionType.BillPay,
+                                        TransactionType = TransactionType.Withdrawal,
                                         AccountNumber = item.AccountNumber,
                                         Amount = item.Amount,
-                                        Comment = "Bill pay",
+                                        Comment = "Transfer",
                                         ModifyDate = datenow
                                     };
                                     context.Transaction.Add(transaction);
@@ -169,7 +168,7 @@ namespace s3827202_s3687609_a2.BackgroundJob
                         {
                             if (datenow == item.ScheduleDate)
                             {
-                                var count = context.Transaction.Where(x => x.AccountNumber == item.AccountNumber && x.TransactionType == TransactionType.BillPay && x.Amount == item.Amount && x.ModifyDate == datenow).Count();
+                                var count = context.Transaction.Where(x => x.AccountNumber == item.AccountNumber && x.TransactionType == TransactionType.Withdrawal && x.Amount == item.Amount && x.ModifyDate == datenow).Count();
                                 if (count > 0)
                                 {
                                     //pay over
@@ -178,10 +177,10 @@ namespace s3827202_s3687609_a2.BackgroundJob
                                 {
                                     Transaction transaction = new Transaction()
                                     {
-                                        TransactionType = TransactionType.BillPay,
+                                        TransactionType = TransactionType.Withdrawal,
                                         AccountNumber = item.AccountNumber,
                                         Amount = item.Amount,
-                                        Comment = "Bill pay",
+                                        Comment = "Transfer",
                                         ModifyDate = datenow
                                     };
                                     context.Transaction.Add(transaction);
@@ -217,7 +216,7 @@ namespace s3827202_s3687609_a2.BackgroundJob
                             }
                             if (date == datenow)
                             {
-                                var count = context.Transaction.Where(x => x.AccountNumber == item.AccountNumber && x.TransactionType == TransactionType.BillPay && x.Amount == item.Amount && x.ModifyDate == datenow).Count();
+                                var count = context.Transaction.Where(x => x.AccountNumber == item.AccountNumber && x.TransactionType == TransactionType.Withdrawal && x.Amount == item.Amount && x.ModifyDate == datenow).Count();
                                 if (count > 0)
                                 {
                                     //pay over
@@ -226,10 +225,10 @@ namespace s3827202_s3687609_a2.BackgroundJob
                                 {
                                     Transaction transaction = new Transaction()
                                     {
-                                        TransactionType = TransactionType.BillPay,
+                                        TransactionType = TransactionType.Withdrawal,
                                         AccountNumber = item.AccountNumber,
                                         Amount = item.Amount,
-                                        Comment = "Bill pay",
+                                        Comment = "Transfer",
                                         ModifyDate = datenow
                                     };
                                     context.Transaction.Add(transaction);
@@ -264,7 +263,7 @@ namespace s3827202_s3687609_a2.BackgroundJob
                             }
                             if (date == datenow)
                             {
-                                var count = context.Transaction.Where(x => x.AccountNumber == item.AccountNumber && x.TransactionType == TransactionType.BillPay && x.Amount == item.Amount && x.ModifyDate == datenow).Count();
+                                var count = context.Transaction.Where(x => x.AccountNumber == item.AccountNumber && x.TransactionType == TransactionType.Withdrawal && x.Amount == item.Amount && x.ModifyDate == datenow).Count();
                                 if (count > 0)
                                 {
                                     //pay over
@@ -273,10 +272,10 @@ namespace s3827202_s3687609_a2.BackgroundJob
                                 {
                                     Transaction transaction = new Transaction()
                                     {
-                                        TransactionType = TransactionType.BillPay,
+                                        TransactionType = TransactionType.Withdrawal,
                                         AccountNumber = item.AccountNumber,
                                         Amount = item.Amount,
-                                        Comment = "Bill pay",
+                                        Comment = "Transfer",
                                         ModifyDate = datenow
                                     };
                                     context.Transaction.Add(transaction);
