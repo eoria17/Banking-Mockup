@@ -77,7 +77,7 @@ namespace s3827202_s3687609_a2.BackgroundJob
                                 }
                             }
                         }
-                        else if (item.Period == Period.Monhly)
+                        else if (item.Period == Period.Monthly)
                         {
                             var date = item.ScheduleDate;
                             while (true)
@@ -203,7 +203,7 @@ namespace s3827202_s3687609_a2.BackgroundJob
                                 }
                             }
                         }
-                        else if (item.Period == Period.Monhly)
+                        else if (item.Period == Period.Monthly)
                         {
                             var date = item.ScheduleDate;
                             while (true)

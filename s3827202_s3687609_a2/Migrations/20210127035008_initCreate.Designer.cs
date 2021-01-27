@@ -10,7 +10,7 @@ using s3827202_s3687609_a2.Data;
 namespace s3827202_s3687609_a2.Migrations
 {
     [DbContext(typeof(BankDBContext))]
-    [Migration("20210127013255_initCreate")]
+    [Migration("20210127035008_initCreate")]
     partial class initCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -250,7 +250,7 @@ namespace s3827202_s3687609_a2.Migrations
             modelBuilder.Entity("s3827202_s3687609_a2.Models.BillPay", b =>
                 {
                     b.HasOne("s3827202_s3687609_a2.Models.Account", "Account")
-                        .WithMany()
+                        .WithMany("BillPays")
                         .HasForeignKey("AccountNumber")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -296,6 +296,8 @@ namespace s3827202_s3687609_a2.Migrations
 
             modelBuilder.Entity("s3827202_s3687609_a2.Models.Account", b =>
                 {
+                    b.Navigation("BillPays");
+
                     b.Navigation("Transactions");
                 });
 

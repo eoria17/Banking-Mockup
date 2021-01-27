@@ -248,7 +248,7 @@ namespace s3827202_s3687609_a2.Migrations
             modelBuilder.Entity("s3827202_s3687609_a2.Models.BillPay", b =>
                 {
                     b.HasOne("s3827202_s3687609_a2.Models.Account", "Account")
-                        .WithMany()
+                        .WithMany("BillPays")
                         .HasForeignKey("AccountNumber")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -294,6 +294,8 @@ namespace s3827202_s3687609_a2.Migrations
 
             modelBuilder.Entity("s3827202_s3687609_a2.Models.Account", b =>
                 {
+                    b.Navigation("BillPays");
+
                     b.Navigation("Transactions");
                 });
 

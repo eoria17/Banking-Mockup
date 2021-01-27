@@ -6,7 +6,7 @@ namespace s3827202_s3687609_a2.Models
 {
     public enum Period
     {
-        Monhly = 1,
+        Monthly = 1,
         Quarterly = 2,
         OnceOff = 3
     }

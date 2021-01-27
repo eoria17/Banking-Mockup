@@ -176,50 +176,28 @@ namespace s3827202_s3687609_a2.Data
                     ModifyDate = DateTime.ParseExact("08/06/2020 10:00:00 PM", format, null)
                 });
 
-            //context.Payee.AddRange(
-            //    new Payee
-            //    {
-            //        PayeeID = 123,
-            //        PayeeName = "Dulcine Bruyns",
-            //        Address = "842 Union Avenue",
-            //        City = "Melbourne",
-            //        State = "VIC",
-            //        PostCode = 3106,
-            //        Phone = "12345678"
-            //    },
-            //    new Payee
-            //    {
-            //        PayeeID = 124,
-            //        PayeeName = "Aurore Treend",
-            //        Address = "558 Fuller Way",
-            //        City = "Melbourne",
-            //        State = "VIC",
-            //        PostCode = 3110,
-            //        Phone = "12365498"
-            //    },
-            //    new Payee
-            //    {
-            //        PayeeID = 125,
-            //        PayeeName = "Carlyn Draude",
-            //        Address = "	3585 Fairview Road",
-            //        City = "Melbourne",
-            //        State = "VIC",
-            //        PostCode = 3189,
-            //        Phone = "12378456"
-            //    },
-            //    new Payee
-            //    {
-            //        PayeeID = 126,
-            //        PayeeName = "Maurits Burry",
-            //        Address = "55 Lerdahl Court",
-            //        City = "Melbourne",
-            //        State = "VIC",
-            //        PostCode = 3789,
-            //        Phone = "12365874"
-            //    }
-            //    );
+            context.Payee.AddRange(
+               new Payee
+               {
+                   PayeeName = "RMIT",
+                   Address = "842 Union Avenue",
+                   City = "Melbourne",
+                   State = "VIC",
+                   PostCode = 3106,
+                   Phone = "+6112345678"
+               },
+               new Payee
+               {
+                   PayeeName = "Electric company",
+                   Address = "558 Fuller Way",
+                   City = "Melbourne",
+                   State = "VIC",
+                   PostCode = 3110,
+                   Phone = "+6112345678"
+               }
+               );
 
-            
+
 
             context.SaveChanges();
         }
