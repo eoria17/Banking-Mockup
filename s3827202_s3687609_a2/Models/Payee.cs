@@ -3,6 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace s3827202_s3687609_a2.Models
 {
+
     public class Payee
     {
         public int PayeeID { get; set; }
@@ -26,6 +27,6 @@ namespace s3827202_s3687609_a2.Models
 
         [Required, StringLength(15)]
         [RegularExpression(@"^(\+61\d{8})$", ErrorMessage = "Please input the correct phone number format (+61xxxxxxxx)")]
-        public int Phone { get; set; }
+        public string Phone { get; set; }
     }
 }

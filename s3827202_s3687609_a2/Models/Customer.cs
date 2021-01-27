@@ -4,6 +4,13 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace s3827202_s3687609_a2.Models
 {
+
+    public enum CustomerStatus
+    {
+        Locked = 1,
+        Unlocked = 2
+    }
+
     public class Customer
     {
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
@@ -32,6 +39,8 @@ namespace s3827202_s3687609_a2.Models
         [Required, StringLength(15)]
         [RegularExpression(@"^(\+61\d{8})$", ErrorMessage = "Please input the correct phone number format (+61xxxxxxxx)")]
         public string Phone { get; set; }
+
+        public CustomerStatus Status { get; set; } //locked or unlocked
 
         public virtual List<Account> Accounts { get; set; }
     }

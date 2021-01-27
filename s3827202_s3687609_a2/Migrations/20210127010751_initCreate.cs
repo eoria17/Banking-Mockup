@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace s3827202_s3687609_a2.Migrations
 {
-    public partial class InitCreate : Migration
+    public partial class initCreate : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -36,7 +36,8 @@ namespace s3827202_s3687609_a2.Migrations
                     City = table.Column<string>(type: "nvarchar(40)", maxLength: 40, nullable: true),
                     State = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: true),
                     PostCode = table.Column<int>(type: "int", maxLength: 10, nullable: true),
-                    Phone = table.Column<int>(type: "int", maxLength: 15, nullable: false)
+                    Phone = table.Column<string>(type: "nvarchar(15)", maxLength: 15, nullable: false),
+                    Status = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {

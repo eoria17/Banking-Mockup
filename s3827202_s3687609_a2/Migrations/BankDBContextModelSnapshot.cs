@@ -172,9 +172,10 @@ namespace s3827202_s3687609_a2.Migrations
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
-                    b.Property<int>("Phone")
+                    b.Property<string>("Phone")
+                        .IsRequired()
                         .HasMaxLength(15)
-                        .HasColumnType("int");
+                        .HasColumnType("nvarchar(15)");
 
                     b.Property<int?>("PostCode")
                         .HasMaxLength(10)
@@ -183,6 +184,9 @@ namespace s3827202_s3687609_a2.Migrations
                     b.Property<string>("State")
                         .HasMaxLength(20)
                         .HasColumnType("nvarchar(20)");
+
+                    b.Property<int>("Status")
+                        .HasColumnType("int");
 
                     b.HasKey("PayeeID");
 

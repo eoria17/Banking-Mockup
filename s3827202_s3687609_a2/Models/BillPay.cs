@@ -11,6 +11,13 @@ namespace s3827202_s3687609_a2.Models
         OnceOff = 3
     }
 
+    public enum BillPayStatus
+    {
+        Available = 1,
+        Blocked = 2,
+        Done = 3
+    }
+
     public class BillPay
     {
         public int BillPayID { get; set; }
@@ -35,5 +42,8 @@ namespace s3827202_s3687609_a2.Models
 
         [Required]
         public DateTime ModifyDate { get; set; }
+
+        [Required]
+        public BillPayStatus Status { get; set; } //locked or unlocked
     }
 }
