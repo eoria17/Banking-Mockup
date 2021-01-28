@@ -32,6 +32,7 @@ namespace MbcaWebAPI
             });
 
             services.AddScoped<HistoryManager>();
+            services.AddScoped<CustomerManager>();
 
             services.AddControllers();
         }
