@@ -15,8 +15,7 @@ namespace s3827202_s3687609_a2.Models
     {
         Available = 1,
         Blocked = 2,
-        Done = 3,
-        Failed = 4
+        Done = 3
     }
 
     public class BillPay

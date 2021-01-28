@@ -53,7 +53,7 @@ namespace s3827202_s3687609_a2.Controllers
                 }
                 else
                 {
-                    ViewData["ErrorMessage"] = "Not enough money or invaild amount";
+                    ViewData["ErrorMessage"] = "Not enough money";
                 }
             }
            

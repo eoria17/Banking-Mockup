@@ -42,7 +42,7 @@ namespace s3827202_s3687609_a2.Controllers
         {           
             if (ModelState.IsValid)
             {
-                if (_context.Account.Where(x=>x.AccountNumber==billPay.AccountNumber).FirstOrDefault().Balance > billPay.Amount&&billPay.Amount>0)
+                if (billPay.Account.Balance > billPay.Amount)
                 {
                     ViewData["ErrorMessage"] = "";
                     billPay.ModifyDate = DateTime.UtcNow;
@@ -53,7 +53,7 @@ namespace s3827202_s3687609_a2.Controllers
                 }
                 else
                 {
-                    ViewData["ErrorMessage"] = "Not enough money or invaild amount";
+                    ViewData["ErrorMessage"] = "Not enough money";
                 }
             }
            

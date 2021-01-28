@@ -42,21 +42,12 @@ namespace s3827202_s3687609_a2.Controllers
         {           
             if (ModelState.IsValid)
             {
-                if (_context.Account.Where(x=>x.AccountNumber==billPay.AccountNumber).FirstOrDefault().Balance > billPay.Amount&&billPay.Amount>0)
-                {
-                    ViewData["ErrorMessage"] = "";
-                    billPay.ModifyDate = DateTime.UtcNow;
-                    billPay.Status = BillPayStatus.Available;
-                    _context.Add(billPay);
-                    await _context.SaveChangesAsync();
-                    return RedirectToAction(nameof(Index));
-                }
-                else
-                {
-                    ViewData["ErrorMessage"] = "Not enough money or invaild amount";
-                }
+                billPay.ModifyDate = DateTime.UtcNow;
+                billPay.Status = BillPayStatus.Available;
+                _context.Add(billPay);
+                await _context.SaveChangesAsync();
+                return RedirectToAction(nameof(Index));
             }
-           
             ViewData["AccountNumber"] = new SelectList(_context.Account.Where(a => a.CustomerID == CustomerID), "AccountNumber", "AccountNumber");
             ViewData["PayeeID"] = new SelectList(_context.Payee.Where(x => x.PayeeID > 0), "PayeeID", "PayeeID");
             return View(billPay);
