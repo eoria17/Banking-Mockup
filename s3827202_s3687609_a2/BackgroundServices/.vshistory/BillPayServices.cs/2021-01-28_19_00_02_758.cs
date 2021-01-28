@@ -70,7 +70,7 @@ namespace s3827202_s3687609_a2.BackgroundJob
                                     context.Transaction.Add(transaction);
                                     await context.SaveChangesAsync();
                                     item.Account.Balance = item.Account.Balance - item.Amount;
-                                    //item.Account.FreeTransaction = item.Account.FreeTransaction - 1;
+                                    item.Account.FreeTransaction = item.Account.FreeTransaction - 1;
                                     context.Account.Update(item.Account);
                                     item.Status = BillPayStatus.Done;
                                     context.BillPay.Update(item);
@@ -109,7 +109,7 @@ namespace s3827202_s3687609_a2.BackgroundJob
                                     context.Transaction.Add(transaction);
                                     await context.SaveChangesAsync();
                                     item.Account.Balance = item.Account.Balance - item.Amount;
-                                    //item.Account.FreeTransaction = item.Account.FreeTransaction - 1;
+                                    item.Account.FreeTransaction = item.Account.FreeTransaction - 1;
                                     context.Account.Update(item.Account);
                                     await context.SaveChangesAsync();
                                 }
@@ -147,7 +147,7 @@ namespace s3827202_s3687609_a2.BackgroundJob
                                     context.Transaction.Add(transaction);
                                     await context.SaveChangesAsync();
                                     item.Account.Balance = item.Account.Balance - item.Amount;
-                                    //item.Account.FreeTransaction = item.Account.FreeTransaction - 1;
+                                    item.Account.FreeTransaction = item.Account.FreeTransaction - 1;
                                     context.Account.Update(item.Account);
                                     await context.SaveChangesAsync();
                                 }
