@@ -1,14 +1,13 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using MbcaWebAPI.Data;
+using Microsoft.EntityFrameworkCore;
+using MbcaWebAPI.Models.DataManager;
+
+
 
 namespace MbcaWebAPI
 {
@@ -24,6 +23,16 @@ namespace MbcaWebAPI
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddDbContext<MbcaDbContext>(options =>
+            {
+                options.UseSqlServer(Configuration.GetConnectionString("MbcaDbContext"));
+
+                // Enable lazy loading.
+                options.UseLazyLoadingProxies();
+            });
+
+            services.AddScoped<HistoryManager>();
+            services.AddScoped<CustomerManager>();
 
             services.AddControllers();
         }
@@ -34,8 +43,9 @@ namespace MbcaWebAPI
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
-            }
 
+            }
+            
             app.UseRouting();
 
             app.UseAuthorization();

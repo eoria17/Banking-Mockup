@@ -33,7 +33,7 @@ namespace s3827202_s3687609_a2.Controllers
         public IActionResult Create()
         {           
             ViewData["AccountNumber"] = new SelectList(_context.Account.Where(a => a.CustomerID == CustomerID), "AccountNumber", "AccountNumber");
-            ViewData["PayeeID"] = new SelectList(_context.Payee.Where(x=>x.PayeeID>0), "PayeeID", "PayeeName");
+            ViewData["PayeeID"] = new SelectList(_context.Payee.Where(x=>x.PayeeID>0), "PayeeID", "PayeeID");
             return View();
         }
         [HttpPost]
@@ -65,7 +65,7 @@ namespace s3827202_s3687609_a2.Controllers
             }
            
             ViewData["AccountNumber"] = new SelectList(_context.Account.Where(a => a.CustomerID == CustomerID), "AccountNumber", "AccountNumber");
-            ViewData["PayeeID"] = new SelectList(_context.Payee.Where(x => x.PayeeID > 0), "PayeeID", "PayeeName");
+            ViewData["PayeeID"] = new SelectList(_context.Payee.Where(x => x.PayeeID > 0), "PayeeID", "PayeeID");
             return View(billPay);
         }
 

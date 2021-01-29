@@ -33,7 +33,7 @@ namespace s3827202_s3687609_a2.Controllers
         public IActionResult Create()
         {           
             ViewData["AccountNumber"] = new SelectList(_context.Account.Where(a => a.CustomerID == CustomerID), "AccountNumber", "AccountNumber");
-            ViewData["PayeeID"] = new SelectList(_context.Payee.Where(x=>x.PayeeID>0), "PayeeID", "PayeeName");
+            ViewData["PayeeID"] = new SelectList(_context.Payee.Where(x=>x.PayeeID>0), "PayeeID", "PayeeID");
             return View();
         }
         [HttpPost]
@@ -44,28 +44,21 @@ namespace s3827202_s3687609_a2.Controllers
             {
                 if (_context.Account.Where(x=>x.AccountNumber==billPay.AccountNumber).FirstOrDefault().Balance > billPay.Amount&&billPay.Amount>0)
                 {
-                    if (billPay.ScheduleDate < Convert.ToDateTime(DateTime.Now.ToString("yyyy-MM-dd")))
-                    {
-                        ModelState.AddModelError(nameof(billPay.ScheduleDate), "Invaild data time.");
-                    }
-                    else
-                    {
-                        ViewData["ErrorMessage"] = "";
-                        billPay.ModifyDate = DateTime.UtcNow;
-                        billPay.Status = BillPayStatus.Available;
-                        _context.Add(billPay);
-                        await _context.SaveChangesAsync();
-                        return RedirectToAction(nameof(Index));
-                    }                   
+                    ViewData["ErrorMessage"] = "";
+                    billPay.ModifyDate = DateTime.UtcNow;
+                    billPay.Status = BillPayStatus.Available;
+                    _context.Add(billPay);
+                    await _context.SaveChangesAsync();
+                    return RedirectToAction(nameof(Index));
                 }
                 else
                 {
-                    ModelState.AddModelError(nameof(billPay.Amount), "Not enough money or invaild amount.");                   
+                    ViewData["ErrorMessage"] = "Not enough money";
                 }
             }
            
             ViewData["AccountNumber"] = new SelectList(_context.Account.Where(a => a.CustomerID == CustomerID), "AccountNumber", "AccountNumber");
-            ViewData["PayeeID"] = new SelectList(_context.Payee.Where(x => x.PayeeID > 0), "PayeeID", "PayeeName");
+            ViewData["PayeeID"] = new SelectList(_context.Payee.Where(x => x.PayeeID > 0), "PayeeID", "PayeeID");
             return View(billPay);
         }
 
