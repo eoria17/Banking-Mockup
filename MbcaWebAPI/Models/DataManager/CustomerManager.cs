@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using MbcaWebAPI.Models.Repository;
 using MbcaWebAPI.Data;
 using MbcaWebAPI.Models.ViewModels;
+using System.Threading;
 
 namespace MbcaWebAPI.Models.DataManager
 {
@@ -21,7 +22,8 @@ namespace MbcaWebAPI.Models.DataManager
         {
             var customer = _context.Customer.ToList();
 
-            var viewModel = customer.Select(x => new CustomerViewModel { 
+            var viewModel = customer.Select(x => new CustomerViewModel
+            {
                 CustomerID = x.CustomerID,
                 CustomerName = x.CustomerName,
                 TFN = x.TFN,
@@ -54,38 +56,43 @@ namespace MbcaWebAPI.Models.DataManager
             };
         }
 
-        public async Task<Customer> Lock(int id)
+        public async Task<CustomerViewModel> Lock(int id)
         {
-            var user = await _context.Customer.FindAsync(id);
+            var x = await _context.Customer.FindAsync(id);
 
-            if (user == null)
+            if (x == null)
             {
                 return null;
             }
 
-            user.Status = CustomerStatus.Locked;
+            x.Status = CustomerStatus.Locked;
 
             await _context.SaveChangesAsync();
 
-            return user;
+            return new CustomerViewModel
+            {
+                CustomerID = x.CustomerID,
+                CustomerName = x.CustomerName,
+                TFN = x.TFN,
+                Address = x.Address,
+                City = x.City,
+                State = x.State,
+                PostCode = x.PostCode,
+                Phone = x.Phone,
+                Status = x.Status
+            };
         }
 
-        public async Task<Customer> Unlock(int id)
+        public async Task Unlock(Object id)
+
         {
-            var user = await _context.Customer.FindAsync(id);
+            await Task.Delay(10000);
 
-            if (user == null)
-            {
-                return null;
-            }
-
-            await Task.Delay(60000);
+            var user =  await _context.Customer.FindAsync(id);
 
             user.Status = CustomerStatus.Unlocked;
 
             await _context.SaveChangesAsync();
-
-            return user;
         }
     }
 }
