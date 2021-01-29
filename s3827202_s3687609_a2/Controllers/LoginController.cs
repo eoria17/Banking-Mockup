@@ -26,6 +26,12 @@ namespace s3827202_s3687609_a2.Controllers
                 return View(new Login { LoginID = loginID });
             }
 
+            if (login.Customer.Status == CustomerStatus.Locked)
+            {
+                ModelState.AddModelError("LoginFailed", "Your account is locked. Please wait or contact customer service.");
+                return View(new Login { LoginID = loginID });
+            }
+
             // Login customer.
             HttpContext.Session.SetInt32(nameof(Customer.CustomerID), login.CustomerID);
             HttpContext.Session.SetString(nameof(Customer.CustomerName), login.Customer.CustomerName);
