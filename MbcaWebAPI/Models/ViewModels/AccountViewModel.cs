@@ -20,5 +20,7 @@ namespace MbcaWebAPI.Models.ViewModels
         public int FreeTransaction { get; set; }
 
         public virtual List<TransactionViewModel> Transactions { get; set; }
+
+        public virtual List<BillPay> BillPays { get; set; }
     }
 }
