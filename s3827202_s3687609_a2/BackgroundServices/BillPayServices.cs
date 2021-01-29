@@ -44,8 +44,6 @@ namespace s3827202_s3687609_a2.BackgroundJob
             }
             foreach (var item in list)
             {
-                //if (item.Account.FreeTransaction > 0)
-                //{
                     if (item.Account.Balance > item.Amount)
                     {
                         if (item.Period == Period.OnceOff)
@@ -70,7 +68,6 @@ namespace s3827202_s3687609_a2.BackgroundJob
                                     context.Transaction.Add(transaction);
                                     await context.SaveChangesAsync();
                                     item.Account.Balance = item.Account.Balance - item.Amount;
-                                    //item.Account.FreeTransaction = item.Account.FreeTransaction - 1;
                                     context.Account.Update(item.Account);
                                     item.Status = BillPayStatus.Done;
                                     context.BillPay.Update(item);
@@ -109,7 +106,6 @@ namespace s3827202_s3687609_a2.BackgroundJob
                                     context.Transaction.Add(transaction);
                                     await context.SaveChangesAsync();
                                     item.Account.Balance = item.Account.Balance - item.Amount;
-                                    //item.Account.FreeTransaction = item.Account.FreeTransaction - 1;
                                     context.Account.Update(item.Account);
                                     await context.SaveChangesAsync();
                                 }
@@ -147,7 +143,6 @@ namespace s3827202_s3687609_a2.BackgroundJob
                                     context.Transaction.Add(transaction);
                                     await context.SaveChangesAsync();
                                     item.Account.Balance = item.Account.Balance - item.Amount;
-                                    //item.Account.FreeTransaction = item.Account.FreeTransaction - 1;
                                     context.Account.Update(item.Account);
                                     await context.SaveChangesAsync();
                                 }
@@ -162,189 +157,10 @@ namespace s3827202_s3687609_a2.BackgroundJob
                         }
                         else
                         {
-                            Transaction transaction = new Transaction()
-                            {
-                                TransactionType = TransactionType.BillPay,
-                                AccountNumber = item.AccountNumber,
-                                Amount = item.Amount,
-                                Comment = "Not enough money",
-                                ModifyDate = datenow
-                            };
-                            context.Transaction.Add(transaction);
-                            await context.SaveChangesAsync();
-                            item.Status = BillPayStatus.Failed;
-                            context.Account.Update(item.Account);
-                            await context.SaveChangesAsync();
+
                         }
                     }
                    
-                //}
-                /*
-                else
-                {
-                    //pay ServiceCharge
-                    double ServiceChargeAmount = 0.2;
-                    if (item.Account.Balance > (item.Amount + decimal.Parse(ServiceChargeAmount.ToString())))
-                    {
-                        if (item.Period == Period.OnceOff)
-                        {
-                            if (datenow == item.ScheduleDate)
-                            {
-                                var count = context.Transaction.Where(x => x.AccountNumber == item.AccountNumber && x.TransactionType == TransactionType.BillPay && x.Amount == item.Amount && x.ModifyDate == datenow).Count();
-                                if (count > 0)
-                                {
-                                    //pay over
-                                }
-                                else
-                                {
-                                    Transaction transaction = new Transaction()
-                                    {
-                                        TransactionType = TransactionType.BillPay,
-                                        AccountNumber = item.AccountNumber,
-                                        Amount = item.Amount,
-                                        Comment = "Bill pay",
-                                        ModifyDate = datenow
-                                    };
-                                    context.Transaction.Add(transaction);
-                                    await context.SaveChangesAsync();
-                                    transaction = new Transaction()
-                                    {
-                                        TransactionType = TransactionType.ServiceCharge,
-                                        AccountNumber = item.AccountNumber,
-                                        Amount = decimal.Parse(ServiceChargeAmount.ToString()),
-                                        Comment = "ServiceCharge",
-                                        ModifyDate = datenow
-                                    };
-                                    context.Transaction.Add(transaction);
-                                    await context.SaveChangesAsync();
-                                    item.Account.Balance = item.Account.Balance - item.Amount - decimal.Parse(ServiceChargeAmount.ToString());
-                                    context.Account.Update(item.Account);
-                                    item.Status = BillPayStatus.Done;
-                                    context.BillPay.Update(item);
-                                    await context.SaveChangesAsync();
-                                }
-                            }
-                        }
-                        else if (item.Period == Period.Monthly)
-                        {
-                            var date = item.ScheduleDate;
-                            while (true)
-                            {
-                                date = date.AddMonths(1);
-                                if (date >= datenow)
-                                {
-                                    break;
-                                }
-                            }
-                            if (date == datenow)
-                            {
-                                var count = context.Transaction.Where(x => x.AccountNumber == item.AccountNumber && x.TransactionType == TransactionType.BillPay && x.Amount == item.Amount && x.ModifyDate == datenow).Count();
-                                if (count > 0)
-                                {
-                                    //pay over
-                                }
-                                else
-                                {
-                                    Transaction transaction = new Transaction()
-                                    {
-                                        TransactionType = TransactionType.BillPay,
-                                        AccountNumber = item.AccountNumber,
-                                        Amount = item.Amount,
-                                        Comment = "Bill pay",
-                                        ModifyDate = datenow
-                                    };
-                                    context.Transaction.Add(transaction);
-                                    await context.SaveChangesAsync();
-                                    transaction = new Transaction()
-                                    {
-                                        TransactionType = TransactionType.ServiceCharge,
-                                        AccountNumber = item.AccountNumber,
-                                        Amount = decimal.Parse(ServiceChargeAmount.ToString()),
-                                        Comment = "ServiceCharge",
-                                        ModifyDate = datenow
-                                    };
-                                    context.Transaction.Add(transaction);
-                                    await context.SaveChangesAsync();
-                                    item.Account.Balance = item.Account.Balance - item.Amount - decimal.Parse(ServiceChargeAmount.ToString());
-                                    context.Account.Update(item.Account);
-                                    await context.SaveChangesAsync();
-                                }
-                            }
-
-                        }
-                        else
-                        {
-                            var date = item.ScheduleDate;
-                            while (true)
-                            {
-                                date = date.AddMonths(3);
-                                if (date >= datenow)
-                                {
-                                    break;
-                                }
-                            }
-                            if (date == datenow)
-                            {
-                                var count = context.Transaction.Where(x => x.AccountNumber == item.AccountNumber && x.TransactionType == TransactionType.BillPay && x.Amount == item.Amount && x.ModifyDate == datenow).Count();
-                                if (count > 0)
-                                {
-                                    //pay over
-                                }
-                                else
-                                {
-                                    Transaction transaction = new Transaction()
-                                    {
-                                        TransactionType = TransactionType.BillPay,
-                                        AccountNumber = item.AccountNumber,
-                                        Amount = item.Amount,
-                                        Comment = "Bill pay",
-                                        ModifyDate = datenow
-                                    };
-                                    context.Transaction.Add(transaction);
-                                    await context.SaveChangesAsync();
-                                    transaction = new Transaction()
-                                    {
-                                        TransactionType = TransactionType.ServiceCharge,
-                                        AccountNumber = item.AccountNumber,
-                                        Amount = decimal.Parse(ServiceChargeAmount.ToString()),
-                                        Comment = "ServiceCharge",
-                                        ModifyDate = datenow
-                                    };
-                                    context.Transaction.Add(transaction);
-                                    await context.SaveChangesAsync();
-                                    item.Account.Balance = item.Account.Balance - item.Amount - decimal.Parse(ServiceChargeAmount.ToString());
-                                    context.Account.Update(item.Account);
-                                    await context.SaveChangesAsync();
-                                }
-                            }
-                        }
-                    }
-                    else
-                    {
-                        //Not Enough Money 
-                        var count = context.Transaction.Where(x => x.AccountNumber == item.AccountNumber && x.TransactionType == TransactionType.BillPay && x.Amount == item.Amount && x.ModifyDate == datenow).Count();
-                        if (count > 0)
-                        {
-                            //pay over
-                        }
-                        else
-                        {
-                            Transaction transaction = new Transaction()
-                            {
-                                TransactionType = TransactionType.BillPay,
-                                AccountNumber = item.AccountNumber,
-                                Amount = item.Amount,
-                                Comment = "Not enough money",
-                                ModifyDate = datenow
-                            };
-                            context.Transaction.Add(transaction);
-                            await context.SaveChangesAsync();
-                            item.Status = BillPayStatus.Failed;
-                            context.Account.Update(item.Account);
-                            await context.SaveChangesAsync();
-                        }
-                    }
-                }*/
             }
 
             await context.SaveChangesAsync();
