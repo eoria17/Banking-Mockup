@@ -9,7 +9,7 @@ using System.Threading;
 
 namespace MbcaWebAPI.Models.DataManager
 {
-    public class CustomerManager : IDataRepository<CustomerViewModel, int>
+    public class CustomerManager : IDataRepository<CustomerViewModel, int>, IDataStatusRepository<CustomerViewModel, int>
     {
         private readonly MbcaDbContext _context;
 
@@ -83,16 +83,29 @@ namespace MbcaWebAPI.Models.DataManager
             };
         }
 
-        public async Task Unlock(Object id)
+        public async Task<CustomerViewModel> Unlock(int id)
 
         {
             await Task.Delay(10000);
 
-            var user =  await _context.Customer.FindAsync(id);
+            var x =  await _context.Customer.FindAsync(id);
 
-            user.Status = CustomerStatus.Unlocked;
+            x.Status = CustomerStatus.Unlocked;
 
             await _context.SaveChangesAsync();
+
+            return new CustomerViewModel
+            {
+                CustomerID = x.CustomerID,
+                CustomerName = x.CustomerName,
+                TFN = x.TFN,
+                Address = x.Address,
+                City = x.City,
+                State = x.State,
+                PostCode = x.PostCode,
+                Phone = x.Phone,
+                Status = x.Status
+            };
         }
     }
 }
