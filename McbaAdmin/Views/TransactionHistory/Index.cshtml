@@ -1,0 +1,53 @@
+﻿@using McbaAdmin.Models.ViewModels
+@model List<TransactionViewModel>
+@{
+    ViewData["Title"] = "Transaction History";
+}
+<h3>Transaction History</h3>
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Index">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label class="control-label">Customer Name:</label>
+                <select  class="form-control" name="CustomerID"  asp-items="ViewBag.CustomerName"></select>
+            </div>
+            <div class="form-group">
+                <label class="control-label">StartTime:</label>
+                <input type="date" name="StartTime" placeholder="dd-MM-YYYY" value="@string.Format("{0:yyyy-MM-dd}", ViewBag.StartTime)" class="form-control" />
+                
+            </div>
+            <div class="form-group">
+                <label class="control-label">End Time:</label>
+                <input type="date" name="EndTime" placeholder="dd-MM-YYYY" value="@string.Format("{0:yyyy-MM-dd}", ViewBag.EndTime)" class="form-control" />               
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Search" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<table class="table">
+    <tr>
+        <th>@Html.DisplayNameFor(model => model[0].TransactionID)</th>
+        <th>@Html.DisplayNameFor(model => model[0].TransactionType)</th>
+        <th>@Html.DisplayNameFor(model => model[0].AccountNumber)</th>
+        <th>@Html.DisplayNameFor(model => model[0].DestAccount)</th>
+        <th>@Html.DisplayNameFor(model => model[0].Amount)</th>
+        <th>@Html.DisplayNameFor(model => model[0].Comment)</th>
+        <th>@Html.DisplayNameFor(model => model[0].ModifyDate)</th>        
+    </tr>
+    @foreach (var item in Model)
+     {
+        <tr>
+            <td>@Html.DisplayFor(x => item.TransactionID)</td>
+            <td>@Html.DisplayFor(x => item.TransactionType)</td>
+            <td>@Html.DisplayFor(x => item.AccountNumber)</td>
+            <td>@Html.DisplayFor(x => item.DestAccount)</td>
+            <td>@Html.DisplayFor(x => item.Amount)</td>
+            <td>@Html.DisplayFor(x => item.Comment)</td>
+            <td>@Html.DisplayFor(x => item.ModifyDate)</td>            
+        </tr>
+     }
+</table>

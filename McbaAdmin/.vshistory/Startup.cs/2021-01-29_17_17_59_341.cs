@@ -26,7 +26,7 @@ namespace McbaAdmin
             // Configure api client.
             services.AddHttpClient("api", client =>
             {
-                client.BaseAddress = new Uri("http://localhost:5100");
+                client.BaseAddress = new Uri("http://localhost:5000");
                 client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
             });
             services.AddControllersWithViews();
