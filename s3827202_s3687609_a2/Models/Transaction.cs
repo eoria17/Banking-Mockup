@@ -13,12 +13,6 @@ namespace s3827202_s3687609_a2.Models
         BillPay = 5 //Debit
     }
 
-    public enum TransactionStatus
-    {
-        Idle = 1,
-        Reported = 2
-    }
-
     public class Transaction
     {
         public int TransactionID { get; set; }
@@ -45,8 +39,6 @@ namespace s3827202_s3687609_a2.Models
         [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}")]
         [DataType(DataType.Date)]
         public DateTime ModifyDate { get; set; }
-
-        public TransactionStatus TransactionStatus { get; set; }
 
     }
 }

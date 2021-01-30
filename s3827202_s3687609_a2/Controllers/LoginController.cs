@@ -44,6 +44,7 @@ namespace s3827202_s3687609_a2.Controllers
         {
             // Logout customer.
             HttpContext.Session.Clear();
+
             return RedirectToAction("Index", "Home");
         }
     }

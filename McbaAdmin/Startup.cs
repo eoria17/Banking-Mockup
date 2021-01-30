@@ -30,13 +30,13 @@ namespace McbaAdmin
                 client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
             });
             services.AddControllersWithViews();
-
+           
 
             // Store session into Web-Server memory.
             services.AddDistributedMemoryCache();
             services.AddSession(options =>
             {
-                // Make the session cookie essential
+                // Make the session cookie essential.
                 options.Cookie.IsEssential = true;
             });
         }

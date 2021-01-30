@@ -13,17 +13,11 @@ namespace MbcaWebAPI.Models
         BillPay = 5 //Debit
     }
 
-    public enum TransactionStatus
-    {
-        Idle = 1,
-        Reported = 2
-    }
-
     public class Transaction
     {
         public int TransactionID { get; set; }
 
-        [Required, StringLength(1)]
+        [Required,StringLength(1)]
         public TransactionType TransactionType { get; set; }
 
         [Required]
@@ -45,8 +39,6 @@ namespace MbcaWebAPI.Models
         [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}")]
         [DataType(DataType.Date)]
         public DateTime ModifyDate { get; set; }
-
-        public TransactionStatus TransactionStatus { get; set; }
 
     }
 }

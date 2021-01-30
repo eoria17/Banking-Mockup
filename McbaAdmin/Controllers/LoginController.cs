@@ -10,7 +10,7 @@ namespace McbaAdmin.Controllers
     {
         public IActionResult Login() => View();
         [HttpPost]
-        public IActionResult Login(string loginID, string password)
+        public async Task<IActionResult> Login(string loginID, string password)
         {
             Login login = new Login();
             login.LoginID = loginID;

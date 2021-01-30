@@ -35,8 +35,7 @@ namespace MbcaWebAPI.Models.DataManager
                     DestAccount = y.DestAccount,
                     Amount = y.Amount,
                     Comment = y.Comment,
-                    ModifyDate = y.ModifyDate,
-                    TransactionStatus = y.TransactionStatus
+                    ModifyDate = y.ModifyDate
                 }).ToList()
             }).ToList();
 
@@ -70,8 +69,7 @@ namespace MbcaWebAPI.Models.DataManager
                         DestAccount = y.DestAccount,
                         Amount = y.Amount,
                         Comment = y.Comment,
-                        ModifyDate = y.ModifyDate,
-                        TransactionStatus = y.TransactionStatus
+                        ModifyDate = y.ModifyDate
                     }).ToList()
                 };
         }
