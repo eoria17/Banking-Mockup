@@ -35,7 +35,7 @@ namespace McbaAdmin.Controllers
                     {
                         if (item.Transactions.Count() > 0)
                         {
-                            transactions.AddRange(item.Transactions.Where(x => x.ModifyDate >= StartTime && x.ModifyDate < Convert.ToDateTime(EndTime).AddDays(1)).ToList());
+                            transactions.AddRange(item.Transactions.Where(x => x.ModifyDate >= StartTime && x.ModifyDate < EndTime).ToList());
                         }
                     }
                 }
