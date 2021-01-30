@@ -1,18 +1,15 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Linq;
-using s3827202_s3687609_a2.Models;
+using IdentityApp.Models;
 
-namespace s3827202_s3687609_a2.Data
+namespace IdentityApp.Data
 {
     public static class SeedData
-    { 
-
+    {
         public static void Initialize(IServiceProvider serviceProvider)
         {
-            var context = serviceProvider.GetRequiredService<BankDBContext>();
-
-            
+            var context = serviceProvider.GetRequiredService<ApplicationDbContext>();
 
             // Look for customers.
             if (context.Customer.Any())
@@ -112,7 +109,8 @@ namespace s3827202_s3687609_a2.Data
                     AccountNumber = 4100,
                     Amount = 100,
                     Comment = initialDeposit,
-                    ModifyDate = DateTime.ParseExact("08/06/2020 08:00:00 PM", format, null)
+                    ModifyDate = DateTime.ParseExact("08/06/2020 08:00:00 PM", format, null),
+                    TransactionStatus = TransactionStatus.Idle
                 },
                 new Transaction
                 {
@@ -120,7 +118,8 @@ namespace s3827202_s3687609_a2.Data
                     AccountNumber = 4100,
                     Amount = 100,
                     Comment = initialDeposit,
-                    ModifyDate = DateTime.ParseExact("09/06/2020 09:00:00 AM", format, null)
+                    ModifyDate = DateTime.ParseExact("09/06/2020 09:00:00 AM", format, null),
+                    TransactionStatus = TransactionStatus.Idle
                 },
                 new Transaction
                 {
@@ -128,7 +127,8 @@ namespace s3827202_s3687609_a2.Data
                     AccountNumber = 4100,
                     Amount = 100,
                     Comment = initialDeposit,
-                    ModifyDate = DateTime.ParseExact("09/06/2020 01:00:00 PM", format, null)
+                    ModifyDate = DateTime.ParseExact("09/06/2020 01:00:00 PM", format, null),
+                    TransactionStatus = TransactionStatus.Idle
                 },
                 new Transaction
                 {
@@ -136,7 +136,8 @@ namespace s3827202_s3687609_a2.Data
                     AccountNumber = 4100,
                     Amount = 100,
                     Comment = initialDeposit,
-                    ModifyDate = DateTime.ParseExact("09/06/2020 03:00:00 PM", format, null)
+                    ModifyDate = DateTime.ParseExact("09/06/2020 03:00:00 PM", format, null),
+                    TransactionStatus = TransactionStatus.Idle
                 },
                 new Transaction
                 {
@@ -144,7 +145,8 @@ namespace s3827202_s3687609_a2.Data
                     AccountNumber = 4100,
                     Amount = 100,
                     Comment = initialDeposit,
-                    ModifyDate = DateTime.ParseExact("10/06/2020 11:00:00 AM", format, null)
+                    ModifyDate = DateTime.ParseExact("10/06/2020 11:00:00 AM", format, null),
+                    TransactionStatus = TransactionStatus.Idle
                 },
                 new Transaction
                 {
@@ -152,7 +154,8 @@ namespace s3827202_s3687609_a2.Data
                     AccountNumber = 4101,
                     Amount = 500,
                     Comment = initialDeposit,
-                    ModifyDate = DateTime.ParseExact("08/06/2020 08:30:00 PM", format, null)
+                    ModifyDate = DateTime.ParseExact("08/06/2020 08:30:00 PM", format, null),
+                    TransactionStatus = TransactionStatus.Idle
                 },
                 new Transaction
                 {
@@ -160,7 +163,8 @@ namespace s3827202_s3687609_a2.Data
                     AccountNumber = 4200,
                     Amount = 500,
                     Comment = initialDeposit,
-                    ModifyDate = DateTime.ParseExact("08/06/2020 09:00:00 PM", format, null)
+                    ModifyDate = DateTime.ParseExact("08/06/2020 09:00:00 PM", format, null),
+                    TransactionStatus = TransactionStatus.Idle
                 },
                 new Transaction
                 {
@@ -168,7 +172,8 @@ namespace s3827202_s3687609_a2.Data
                     AccountNumber = 4200,
                     Amount = 0.95m,
                     Comment = initialDeposit,
-                    ModifyDate = DateTime.ParseExact("08/06/2020 09:00:00 PM", format, null)
+                    ModifyDate = DateTime.ParseExact("08/06/2020 09:00:00 PM", format, null),
+                    TransactionStatus = TransactionStatus.Idle
                 },
                 new Transaction
                 {
@@ -176,7 +181,8 @@ namespace s3827202_s3687609_a2.Data
                     AccountNumber = 4300,
                     Amount = 1250.50m,
                     Comment = initialDeposit,
-                    ModifyDate = DateTime.ParseExact("08/06/2020 10:00:00 PM", format, null)
+                    ModifyDate = DateTime.ParseExact("08/06/2020 10:00:00 PM", format, null),
+                    TransactionStatus = TransactionStatus.Idle
                 });
 
             context.Payee.AddRange(

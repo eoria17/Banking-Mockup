@@ -1,21 +1,25 @@
-﻿using Microsoft.EntityFrameworkCore;
-using MbcaWebAPI.Models;
+﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
+using System;
+using System.Collections.Generic;
+using System.Text;
+using IdentityApp.Models;
 
-namespace MbcaWebAPI.Data
+namespace IdentityApp.Data
 {
-    public class MbcaDbContext : DbContext
+    public class ApplicationDbContext : IdentityDbContext
     {
-        public MbcaDbContext(DbContextOptions<MbcaDbContext> options) : base(options)
+        public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
+            : base(options)
         {
-            
         }
 
-        public DbSet<Transaction> Transaction { get; set; }
         public DbSet<Account> Account { get; set; }
         public DbSet<BillPay> BillPay { get; set; }
         public DbSet<Customer> Customer { get; set; }
         public DbSet<Login> Login { get; set; }
         public DbSet<Payee> Payee { get; set; }
+        public DbSet<Transaction> Transaction { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
