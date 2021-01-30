@@ -14,6 +14,7 @@ namespace MbcaWebAPI.Models.ViewModels
         public decimal? Amount { get; set; }
         public string? Comment { get; set; }
         public DateTime ModifyDate { get; set; }
+        public TransactionStatus TransactionStatus { get; set; }
 
     }
 }
