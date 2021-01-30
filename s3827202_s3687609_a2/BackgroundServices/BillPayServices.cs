@@ -33,7 +33,7 @@ namespace s3827202_s3687609_a2.BackgroundJob
         {
 
             using var scope = _services.CreateScope();
-            var context = scope.ServiceProvider.GetRequiredService<BankDBContext>();
+            var context = scope.ServiceProvider.GetRequiredService<BankDbContext>();
 
             // Get all the data of the transfer date earlier than the next day
             List<BillPay> list = await context.BillPay.Where(a => a.ScheduleDate <= DateTime.Now&&a.Status==BillPayStatus.Available).Include(a => a.Account).Include(a => a.Payee).ToListAsync(cancellationToken);

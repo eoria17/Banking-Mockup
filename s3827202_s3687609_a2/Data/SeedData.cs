@@ -2,18 +2,66 @@
 using System;
 using System.Linq;
 using s3827202_s3687609_a2.Models;
+using Microsoft.AspNetCore.Identity;
+using System.Threading.Tasks;
+using s3827202_s3687609_a2.Areas.Identity.Data;
 
 namespace s3827202_s3687609_a2.Data
 {
     public static class SeedData
     { 
 
-        public static void Initialize(IServiceProvider serviceProvider)
+        public static async Task AdminSeed(IServiceProvider serviceProvider)
         {
-            var context = serviceProvider.GetRequiredService<BankDBContext>();
+            var RoleManager = serviceProvider.GetRequiredService<RoleManager<IdentityRole>>();
+            var UserManager = serviceProvider.GetRequiredService<UserManager<BankDbUser>>();
+            string[] roleNames = { "Admin", "Customer" };
 
-            
+            IdentityResult roleResult;
 
+            foreach (var roleName in roleNames)
+            {
+                var roleExist = await RoleManager.RoleExistsAsync(roleName);
+                if (!roleExist)
+                {
+                    //create the roles and seed them to the database: Question 1
+                    roleResult = await RoleManager.CreateAsync(new IdentityRole(roleName));
+                }
+            }
+
+            var poweruser = new BankDbUser
+            {
+                UserName = "admin",
+                Email = "admin@gmail.com",
+                EmailConfirmed = true
+            };
+
+            //Ensure you have these values in your appsettings.json file
+            string userPWD = "Abc123!";
+            var _user = await UserManager.FindByEmailAsync(poweruser.Email);
+
+            if (_user == null)
+            {
+                var createPowerUser = await UserManager.CreateAsync(poweruser, userPWD);
+                if (createPowerUser.Succeeded)
+                {
+                    //here we tie the new user to the role
+                    await UserManager.AddToRoleAsync(poweruser, "Admin");
+
+                }
+            }
+        }
+
+        public static async Task Initialize(IServiceProvider serviceProvider)
+        {
+            var context = serviceProvider.GetRequiredService<BankDbContext>();
+
+            await AdminSeed(serviceProvider);
+
+            //
+            //
+            //
+            //preload data
             // Look for customers.
             if (context.Customer.Any())
                 return; // DB has already been seeded.
@@ -48,7 +96,7 @@ namespace s3827202_s3687609_a2.Data
 
                 });
 
-            context.Login.AddRange(
+            /*context.Login.AddRange(
                 new Login
                 {
                     LoginID = "12345678",
@@ -66,7 +114,7 @@ namespace s3827202_s3687609_a2.Data
                     LoginID = "17963428",
                     CustomerID = 2300,
                     PasswordHash = "LuiVJWbY4A3y1SilhMU5P00K54cGEvClx5Y+xWHq7VpyIUe5fe7m+WeI0iwid7GE"
-                });
+                });*/
 
             context.Account.AddRange(
                 new Account
@@ -199,8 +247,6 @@ namespace s3827202_s3687609_a2.Data
                    Phone = "+6112345678"
                }
                );
-
-
 
             context.SaveChanges();
         }

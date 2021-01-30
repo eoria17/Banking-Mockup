@@ -15,9 +15,9 @@ namespace s3827202_s3687609_a2.Controllers
     [AuthorizeCustomer]
     public class BillPayController : Controller
     {
-        private readonly BankDBContext _context;
+        private readonly BankDbContext _context;
         private int CustomerID => HttpContext.Session.GetInt32(nameof(Customer.CustomerID)).Value;
-        public BillPayController(BankDBContext context)
+        public BillPayController(BankDbContext context)
         {
             _context = context;
         } 

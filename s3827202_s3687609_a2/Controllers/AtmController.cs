@@ -16,11 +16,11 @@ namespace s3827202_s3687609_a2.Controllers
     [AuthorizeCustomer]
     public class AtmController : Controller
     {
-        private readonly BankDBContext _context;
+        private readonly BankDbContext _context;
 
         private int CustomerID => HttpContext.Session.GetInt32(nameof(Customer.CustomerID)).Value;
 
-        public AtmController(BankDBContext context) => _context = context;
+        public AtmController(BankDbContext context) => _context = context;
 
         public IActionResult AtmTransaction()
         {

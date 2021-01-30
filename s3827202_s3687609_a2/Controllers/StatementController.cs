@@ -11,7 +11,6 @@ using s3827202_s3687609_a2.Common;
 using s3827202_s3687609_a2.Data;
 using s3827202_s3687609_a2.Filters;
 using s3827202_s3687609_a2.Models;
-using s3827202_s3687609_a2.Filters;
 
 
 namespace s3827202_s3687609_a2.Controllers
@@ -19,10 +18,10 @@ namespace s3827202_s3687609_a2.Controllers
     [AuthorizeCustomer]
     public class StatementController : Controller
     {
-        private readonly BankDBContext _context;
+        private readonly BankDbContext _context;
 
         private int CustomerID => HttpContext.Session.GetInt32(nameof(Customer.CustomerID)).Value;
-        public StatementController(BankDBContext context)
+        public StatementController(BankDbContext context)
         {
             _context = context;
         }
