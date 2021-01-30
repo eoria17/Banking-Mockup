@@ -5,9 +5,9 @@ VisualStudioVersion = 16.0.30907.101
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "s3827202_s3687609_a2", "s3827202_s3687609_a2\s3827202_s3687609_a2.csproj", "{409ED938-FC8D-4B95-B3D8-161A1DE50395}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MbcaWebAPI", "MbcaWebAPI\MbcaWebAPI.csproj", "{8FF4803F-EBEC-416F-AA34-0AEA7DB2B9E5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MbcaWebAPI", "MbcaWebAPI\MbcaWebAPI.csproj", "{8FF4803F-EBEC-416F-AA34-0AEA7DB2B9E5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "McbaAdmin", "McbaAdmin\McbaAdmin.csproj", "{78C28335-D0A5-4340-8ABE-53EE49EF5630}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "McbaAdmin", "McbaAdmin\McbaAdmin.csproj", "{78C28335-D0A5-4340-8ABE-53EE49EF5630}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

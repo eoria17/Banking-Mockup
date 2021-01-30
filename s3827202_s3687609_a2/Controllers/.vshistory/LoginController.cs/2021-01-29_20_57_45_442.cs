@@ -43,7 +43,7 @@ namespace s3827202_s3687609_a2.Controllers
         public IActionResult Logout()
         {
             // Logout customer.
-            HttpContext.Session.Clear();
+            HttpContext.Session.Clear();            
             return RedirectToAction("Index", "Home");
         }
     }
