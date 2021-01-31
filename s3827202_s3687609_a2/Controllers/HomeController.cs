@@ -18,10 +18,13 @@ namespace s3827202_s3687609_a2.Controllers
             {
                 return View();
             }
-            return View();
+            else
+            {
+                return View();
+            }
+            
 
         }
-        
 
         //public IActionResult Privacy() => View();
 

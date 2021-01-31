@@ -68,6 +68,7 @@ namespace s3827202_s3687609_a2
                 options.User.AllowedUserNameCharacters =
                 "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-._@+";
                 options.User.RequireUniqueEmail = false;
+                
                 //options.SignIn.RequireConfirmedAccount = true;
             });
 
