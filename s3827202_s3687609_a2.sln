@@ -9,8 +9,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MbcaWebAPI", "MbcaWebAPI\Mb
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "McbaAdmin", "McbaAdmin\McbaAdmin.csproj", "{78C28335-D0A5-4340-8ABE-53EE49EF5630}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IdentityApp", "IdentityApp\IdentityApp.csproj", "{D11AB0CD-13AC-40D9-8F01-08398A7BAE58}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -29,10 +27,6 @@ Global
 		{78C28335-D0A5-4340-8ABE-53EE49EF5630}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{78C28335-D0A5-4340-8ABE-53EE49EF5630}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{78C28335-D0A5-4340-8ABE-53EE49EF5630}.Release|Any CPU.Build.0 = Release|Any CPU
-		{D11AB0CD-13AC-40D9-8F01-08398A7BAE58}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{D11AB0CD-13AC-40D9-8F01-08398A7BAE58}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{D11AB0CD-13AC-40D9-8F01-08398A7BAE58}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{D11AB0CD-13AC-40D9-8F01-08398A7BAE58}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
