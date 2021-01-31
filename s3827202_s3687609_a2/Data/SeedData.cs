@@ -54,8 +54,8 @@ namespace s3827202_s3687609_a2.Data
 
             var newUser = new BankDbUser
             {
-                UserName = "s3827202@rmit.student.edu.au",
-                Email = "s3827202@rmit.student.edu.au",
+                UserName = "s3827202@student.rmit.edu.au",
+                Email = "s3827202@student.rmit.edu.au",
                 EmailConfirmed = true,
                 CustomerID = 2100
             };

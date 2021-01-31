@@ -12,6 +12,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
 using s3827202_s3687609_a2.Areas.Identity.Data;
+using s3827202_s3687609_a2.Data;
+using s3827202_s3687609_a2.Areas.Banking.Models;
 
 namespace s3827202_s3687609_a2.Areas.Identity.Pages.Account
 {
@@ -21,14 +23,16 @@ namespace s3827202_s3687609_a2.Areas.Identity.Pages.Account
         private readonly UserManager<BankDbUser> _userManager;
         private readonly SignInManager<BankDbUser> _signInManager;
         private readonly ILogger<LoginModel> _logger;
+        private readonly BankDbContext _context;
 
         public LoginModel(SignInManager<BankDbUser> signInManager, 
             ILogger<LoginModel> logger,
-            UserManager<BankDbUser> userManager)
+            UserManager<BankDbUser> userManager, BankDbContext context)
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _logger = logger;
+            _context = context;
         }
 
         [BindProperty]
@@ -82,14 +86,21 @@ namespace s3827202_s3687609_a2.Areas.Identity.Pages.Account
                 // This doesn't count login failures towards account lockout
                 // To enable password failures to trigger account lockout, set lockoutOnFailure: true
                 var result = await _signInManager.PasswordSignInAsync(Input.Username, Input.Password, Input.RememberMe, lockoutOnFailure: false);
+                var customerStatus =  _context.Users.Where(x => x.Email == Input.Username).Select(x => x.Customer.Status).FirstOrDefault();
+
                 if (result.Succeeded)
                 {
                     _logger.LogInformation("User logged in.");
 
+                    if (customerStatus == CustomerStatus.Locked)
+                    {
+                        await _signInManager.SignOutAsync();
+                        ModelState.AddModelError(string.Empty, "Your account is locked, please try again in a few minutes or contact customer service.");
+                        return Page();
+                    }
                     return Redirect("~/");
                     //return RedirectToAction("Index", "Customer", new { area = "Banking" });
-                    
-                    
+                   
                 }
                 if (result.RequiresTwoFactor)
                 {

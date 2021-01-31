@@ -1,0 +1,39 @@
+﻿@model List<CustomerViewModel>
+@{
+    ViewData["Title"] = "Customer List";
+}
+<h3>Customer List</h3>
+<table class="table">
+    <tr>
+        <th>@Html.DisplayNameFor(model => model[0].CustomerID)</th>
+        <th>@Html.DisplayNameFor(model => model[0].CustomerName)</th>
+        <th>@Html.DisplayNameFor(model => model[0].TFN)</th>
+        <th>@Html.DisplayNameFor(model => model[0].Address)</th>
+        <th>@Html.DisplayNameFor(model => model[0].City)</th>
+        <th>@Html.DisplayNameFor(model => model[0].State)</th>
+        <th>@Html.DisplayNameFor(model => model[0].PostCode)</th>
+        <th>@Html.DisplayNameFor(model => model[0].Phone)</th>
+        <th>@Html.DisplayNameFor(model => model[0].Status)</th>        
+        <th>Action</th>
+    </tr>
+    @foreach (var item in Model)
+    {
+<tr>
+    <td>@Html.DisplayFor(x => item.CustomerID)</td>
+    <td>@Html.DisplayFor(x => item.CustomerName)</td>
+    <td>@Html.DisplayFor(x => item.TFN)</td>
+    <td>@Html.DisplayFor(x => item.Address)</td>
+    <td>@Html.DisplayFor(x => item.City)</td>
+    <td>@Html.DisplayFor(x => item.State)</td>
+    <td>@Html.DisplayFor(x => item.PostCode)</td>
+    <td>@Html.DisplayFor(x => item.Phone)</td>
+    <td>@Html.DisplayFor(x => item.Status)</td>
+    <td>
+        @if (item.Status == CustomerStatus.Unlocked)
+        {
+            <a asp-action="Lock" class="btn btn-primary" asp-route-id="@item.CustomerID">Lock</a>
+        }
+    </td>
+</tr>
+    }
+</table>
