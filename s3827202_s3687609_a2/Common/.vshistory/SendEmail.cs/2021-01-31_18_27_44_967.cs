@@ -6,7 +6,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using s3827202_s3687609_a2.Areas.Banking.Models;
 
 namespace s3827202_s3687609_a2.Common
 {
@@ -37,7 +36,6 @@ namespace s3827202_s3687609_a2.Common
             public string receiveName { get; set; }
             public List<Transaction> transactions { get; set; }
             public decimal balance { get; set; }
-            public decimal prebalance { get; set; }
             public string accountID { get; set; }
             public string customerAddress { get; set; }
         }
@@ -47,24 +45,16 @@ namespace s3827202_s3687609_a2.Common
             if (emailTemp.balance == -1)
             {
                 stringBuilder.Append("My Balance:  <br/>");
-                stringBuilder.Append(" <br/>");
             }
             else
             {
                 stringBuilder.Append("My Balance:" + emailTemp.balance + "   <br/>");
-                stringBuilder.Append(" <br/>");
             }            
-            stringBuilder.Append("Receive Email:" + emailTemp.receiveEmail + "   <br/>");
-            stringBuilder.Append(" <br/>");
-            stringBuilder.Append("Receive Name:" + emailTemp.receiveName + "   <br/>");
-            stringBuilder.Append(" <br/>");
-            stringBuilder.Append("Account ID:" + emailTemp.accountID + "   <br/>");
-            stringBuilder.Append(" <br/>");
-            stringBuilder.Append("Customer Address:" + emailTemp.customerAddress + "   <br/>");
-            stringBuilder.Append(" <br/>");
-            stringBuilder.Append(" <br/>");
-            stringBuilder.Append(" <br/>");
-            stringBuilder.Append("<table><tr><th>AccountNumber</th><th>DestAccount</th><th>Amount</th><th>ModifyDate</th><th>Comment</th><th>TransactionType</th></tr>");
+            stringBuilder.Append("receiveEmail:" + emailTemp.receiveEmail + "   <br/>");
+            stringBuilder.Append("receiveName:" + emailTemp.receiveName + "   <br/>");
+            stringBuilder.Append("accountID:" + emailTemp.accountID + "   <br/>");
+            stringBuilder.Append("customerAddress:" + emailTemp.customerAddress + "   <br/>");
+            stringBuilder.Append("<table><tr><th>AccountNumber</th><th>DestAccount</th><th>Amount</th><th>ModifyDate</th><th>Comment</th></tr>");
             foreach (var item in emailTemp.transactions)
             {
                 stringBuilder.Append("<tr>");
@@ -72,8 +62,7 @@ namespace s3827202_s3687609_a2.Common
                 stringBuilder.Append("<td>" + item.DestAccount + "</td>");
                 stringBuilder.Append("<td>" + item.Amount + "</td>");
                 stringBuilder.Append("<td>" + item.ModifyDate + "</td>");
-                stringBuilder.Append("<td>" + item.Comment + "</td>");
-                stringBuilder.Append("<td>" + item.TransactionType + "</td>");
+                stringBuilder.Append("<td>" + item.Comment + "</td>");                
             }
             stringBuilder.Append("</table>");
             return stringBuilder.ToString();
