@@ -19,34 +19,34 @@ namespace s3827202_s3687609_a2.Areas.Banking.Models
         Reported = 2
     }
 
-    public class Transaction
+    public record Transaction
     {
-        public int TransactionID { get; set; }
+        public int TransactionID { get; init; }
 
         [Required,StringLength(1)]
-        public TransactionType TransactionType { get; set; }
+        public TransactionType TransactionType { get; init; }
 
         [Required]
-        public int AccountNumber { get; set; }
+        public int AccountNumber { get; init; }
         [ForeignKey("AccountNumber")]
-        public virtual Account SourceAccount { get; set; }
+        public virtual Account SourceAccount { get; init; }
 
-        public int? DestAccount { get; set; }
+        public int? DestAccount { get; init; }
         [ForeignKey("DestAccount")]
-        public virtual Account DestinationAccount { get; set; }
+        public virtual Account DestinationAccount { get; init; }
 
         [Column(TypeName = "money")]
         [DataType(DataType.Currency)]
-        public decimal? Amount { get; set; }
+        public decimal? Amount { get; init; }
 
         [StringLength(255)]
-        public string? Comment { get; set; }
+        public string? Comment { get; init; }
 
         [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}")]
         [DataType(DataType.Date)]
-        public DateTime ModifyDate { get; set; }
+        public DateTime ModifyDate { get; init; }
 
-        public TransactionStatus TransactionStatus { get; set; }
+        public TransactionStatus TransactionStatus { get; init; }
 
     }
 }

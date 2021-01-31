@@ -34,6 +34,7 @@ namespace s3827202_s3687609_a2.Controllers
             public decimal Balance { get; set; }          
         }
         [HttpGet]
+        [Route("/Statement/GetAccounts")]
         public async Task<string> GetAccounts(int AccountType)
         {
             var user = await _userManager.GetUserAsync(User);
