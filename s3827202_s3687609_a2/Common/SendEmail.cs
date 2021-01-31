@@ -48,14 +48,10 @@ namespace s3827202_s3687609_a2.Common
             {
                 stringBuilder.Append("My Balance:  <br/>");
                 stringBuilder.Append(" <br/>");
-                stringBuilder.Append("My previous Balance: <br/>");
-                stringBuilder.Append(" <br/>");
             }
             else
             {
                 stringBuilder.Append("My Balance:" + emailTemp.balance + "   <br/>");
-                stringBuilder.Append(" <br/>");
-                stringBuilder.Append("My previous Balance:" + emailTemp.prebalance + "   <br/>");
                 stringBuilder.Append(" <br/>");
             }            
             stringBuilder.Append("Receive Email:" + emailTemp.receiveEmail + "   <br/>");

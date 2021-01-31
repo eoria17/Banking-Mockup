@@ -60,20 +60,16 @@ namespace s3827202_s3687609_a2.BackgroundServices
                             {
                                 if (listOver.Where(x => x.AccountNumber == account.AccountNumber).ToList().Count() > 0)
                                 {
-                                    var pre = newTrancitonList.Where(x => x.AccountNumber == account.AccountNumber).ToList().Sum(x=>x.Amount);
                                     emailTemp.balance = account.Balance;
-                                    emailTemp.prebalance = account.Balance + decimal.Parse(pre.ToString());
                                 }
                                 else
                                 {
                                     emailTemp.balance = -1;
-                                    emailTemp.prebalance = -1;
                                 }
                             }
                             else
                             {
                                 emailTemp.balance = -1;
-                                emailTemp.prebalance = -1;
                             }
                             emailTemp.customerAddress = item.Address;
                             emailTemp.receiveEmail = context.Users.Where(x => x.CustomerID
