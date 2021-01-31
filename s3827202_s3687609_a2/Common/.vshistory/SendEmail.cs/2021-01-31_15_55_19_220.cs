@@ -16,7 +16,7 @@ namespace s3827202_s3687609_a2.Common
             var client = new SendGridClient("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");
             var from = new EmailAddress("wsx283848@qq.com", "Example User");
             var subject = "Sending with SendGrid is Fun";
-            var to = new EmailAddress(emailTemp.receiveEmail, emailTemp.receiveName);
+            var to = new EmailAddress("wsx283848@gmail.com", emailTemp.receiveName);
             var plainTextContent = "and easy to do anywhere, even with C#";
             var htmlContent = GetHtmlContent(emailTemp);
             var msg = MailHelper.CreateSingleEmail(from, to, subject, plainTextContent, htmlContent);
