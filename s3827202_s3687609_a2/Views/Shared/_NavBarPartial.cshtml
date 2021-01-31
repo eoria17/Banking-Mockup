@@ -19,7 +19,7 @@
         <a class="nav-link text-dark" asp-area="Banking" asp-controller="BillPay" asp-action="Index">Atm Transaction</a>
     </li>
 }
-else if (SignInManager.IsSignedIn(User) && User.IsInRole("Customer"))
+else if (SignInManager.IsSignedIn(User) && User.IsInRole("Admin"))
 {
     <li class="nav-item">
         <a class="nav-link text-dark" asp-area="Admin" asp-controller="TransactionHistory" asp-action="Index">Transaction Management</a>

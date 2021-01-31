@@ -16,8 +16,9 @@ namespace s3827202_s3687609_a2.Controllers
             }
             else if (User.IsInRole("Admin"))
             {
-                return RedirectToAction("Index", "Customer", new { area = "Banking" });
+                return View();
             }
+            return View();
 
         }
         
