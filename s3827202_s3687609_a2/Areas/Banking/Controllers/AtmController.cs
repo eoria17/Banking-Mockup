@@ -168,6 +168,7 @@ namespace s3827202_s3687609_a2.Controllers
                         TransactionType = TransactionType.Transfer,
                         Amount = amount,
                         Comment = comment,
+                        DestAccount = destAccount,
                         ModifyDate = DateTime.UtcNow,
                         TransactionStatus = TransactionStatus.Idle
                     });

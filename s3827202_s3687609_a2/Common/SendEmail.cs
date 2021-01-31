@@ -48,7 +48,7 @@ namespace s3827202_s3687609_a2.Common
             {
                 stringBuilder.Append("My Balance:  <br/>");
                 stringBuilder.Append(" <br/>");
-                stringBuilder.Append("My previous Balance:" + emailTemp.prebalance + "   <br/>");
+                stringBuilder.Append("My previous Balance: <br/>");
                 stringBuilder.Append(" <br/>");
             }
             else
@@ -68,7 +68,7 @@ namespace s3827202_s3687609_a2.Common
             stringBuilder.Append(" <br/>");
             stringBuilder.Append(" <br/>");
             stringBuilder.Append(" <br/>");
-            stringBuilder.Append("<table><tr><th>AccountNumber</th><th>DestAccount</th><th>Amount</th><th>ModifyDate</th><th>Comment</th></tr>");
+            stringBuilder.Append("<table><tr><th>AccountNumber</th><th>DestAccount</th><th>Amount</th><th>ModifyDate</th><th>Comment</th><th>TransactionType</th></tr>");
             foreach (var item in emailTemp.transactions)
             {
                 stringBuilder.Append("<tr>");
@@ -76,7 +76,8 @@ namespace s3827202_s3687609_a2.Common
                 stringBuilder.Append("<td>" + item.DestAccount + "</td>");
                 stringBuilder.Append("<td>" + item.Amount + "</td>");
                 stringBuilder.Append("<td>" + item.ModifyDate + "</td>");
-                stringBuilder.Append("<td>" + item.Comment + "</td>");                
+                stringBuilder.Append("<td>" + item.Comment + "</td>");
+                stringBuilder.Append("<td>" + item.TransactionType + "</td>");
             }
             stringBuilder.Append("</table>");
             return stringBuilder.ToString();
