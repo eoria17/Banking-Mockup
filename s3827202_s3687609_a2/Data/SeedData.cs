@@ -1,7 +1,7 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Linq;
-using s3827202_s3687609_a2.Models;
+using s3827202_s3687609_a2.Areas.Banking.Models;
 using Microsoft.AspNetCore.Identity;
 using System.Threading.Tasks;
 using s3827202_s3687609_a2.Areas.Identity.Data;
@@ -50,13 +50,37 @@ namespace s3827202_s3687609_a2.Data
 
                 }
             }
+
+
+            var newUser = new BankDbUser
+            {
+                UserName = "s3827202@rmit.student.edu.au",
+                Email = "s3827202@rmit.student.edu.au",
+                EmailConfirmed = true,
+                CustomerID = 2100
+            };
+
+            //Ensure you have these values in your appsettings.json file
+            string userPWD1 = "Abc123!";
+            var _user1 = await UserManager.FindByEmailAsync(newUser.Email);
+
+            if (_user1 == null)
+            {
+                var createNewUser = await UserManager.CreateAsync(newUser, userPWD1);
+                if (createNewUser.Succeeded)
+                {
+                    //here we tie the new user to the role
+                    await UserManager.AddToRoleAsync(newUser, "Customer");
+
+                }
+            }
         }
 
         public static async Task Initialize(IServiceProvider serviceProvider)
         {
             var context = serviceProvider.GetRequiredService<BankDbContext>();
 
-            await AdminSeed(serviceProvider);
+            
 
             //
             //
@@ -70,7 +94,7 @@ namespace s3827202_s3687609_a2.Data
                 new Customer
                 {
                     CustomerID = 2100,
-                    CustomerName = "Matthew Bolger",
+                    CustomerName = "Theo Riandy",
                     Address = "123 Fake Street",
                     City = "Melbourne",
                     PostCode = "3000",
@@ -249,6 +273,8 @@ namespace s3827202_s3687609_a2.Data
                );
 
             context.SaveChanges();
+
+            await AdminSeed(serviceProvider);
         }
     }
 }

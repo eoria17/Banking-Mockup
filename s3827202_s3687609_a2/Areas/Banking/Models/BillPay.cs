@@ -2,7 +2,7 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace s3827202_s3687609_a2.Models
+namespace s3827202_s3687609_a2.Areas.Banking.Models
 {
     public enum Period
     {

@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using s3827202_s3687609_a2.Data;
-using s3827202_s3687609_a2.Models;
+using s3827202_s3687609_a2.Areas.Banking.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;

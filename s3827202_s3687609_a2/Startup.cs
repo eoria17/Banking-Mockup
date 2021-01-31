@@ -9,6 +9,9 @@ using s3827202_s3687609_a2.BackgroundJob;
 using Microsoft.AspNetCore.Identity;
 using System;
 using s3827202_s3687609_a2.Areas.Identity.Data;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc.Authorization;
+using System.Security.Claims;
 
 
 namespace s3827202_s3687609_a2
@@ -56,6 +59,7 @@ namespace s3827202_s3687609_a2
                 options.User.AllowedUserNameCharacters =
                 "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-._@+";
                 options.User.RequireUniqueEmail = false;
+                //options.SignIn.RequireConfirmedAccount = true;
             });
 
             services.AddDefaultIdentity<BankDbUser>()
@@ -73,6 +77,15 @@ namespace s3827202_s3687609_a2
                 options.SlidingExpiration = true;
             });
 
+            services.AddControllers(config =>
+            {
+                // using Microsoft.AspNetCore.Mvc.Authorization;
+                // using Microsoft.AspNetCore.Authorization;
+                var policy = new AuthorizationPolicyBuilder()
+                                 .RequireAuthenticatedUser()
+                                 .Build();
+                config.Filters.Add(new AuthorizeFilter(policy));
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -100,8 +113,14 @@ namespace s3827202_s3687609_a2
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(
+                    name: "areas",
+                    pattern: "{area:exists}/{controller=Home}/{action=Index}/{id?}"
+                  );
+
+                endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
+
                 endpoints.MapRazorPages();
             });
         }
