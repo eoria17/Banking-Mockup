@@ -74,6 +74,31 @@ namespace s3827202_s3687609_a2.Data
 
                 }
             }
+
+            var newUser1 = new BankDbUser
+            {
+                UserName = "s3687609@student.rmit.edu.au",
+                Email = "s3687609@student.rmit.edu.au",
+                EmailConfirmed = true,
+                CustomerID = 2100
+            };
+
+            //Ensure you have these values in your appsettings.json file
+            string userPWD2 = "Abc123!";
+            var _user2 = await UserManager.FindByEmailAsync(newUser1.Email);
+
+            if (_user2 == null)
+            {
+                var createNewUser1 = await UserManager.CreateAsync(newUser1, userPWD2);
+                if (createNewUser1.Succeeded)
+                {
+                    //here we tie the new user to the role
+                    await UserManager.AddToRoleAsync(newUser1, "Customer");
+
+                }
+            }
+
+
         }
 
         public static async Task Initialize(IServiceProvider serviceProvider)
