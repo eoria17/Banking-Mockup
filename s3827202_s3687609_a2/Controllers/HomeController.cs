@@ -8,7 +8,19 @@ namespace s3827202_s3687609_a2.Controllers
     [AllowAnonymous]
     public class HomeController : Controller
     {
-        public IActionResult Index() => View();
+        public IActionResult Index()
+        {
+            if (User.IsInRole("Customer"))
+            {
+                return RedirectToAction("Index", "Customer", new { area = "Banking"});
+            }
+            else if (User.IsInRole("Admin"))
+            {
+                return RedirectToAction("Index", "Customer", new { area = "Banking" });
+            }
+
+        }
+        
 
         //public IActionResult Privacy() => View();
 
