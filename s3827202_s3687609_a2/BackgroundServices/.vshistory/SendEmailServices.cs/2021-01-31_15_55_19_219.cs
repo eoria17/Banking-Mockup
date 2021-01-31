@@ -31,7 +31,7 @@ namespace s3827202_s3687609_a2.BackgroundServices
             }
         }
         private async Task DoWork(CancellationToken cancellationToken)
-        {         
+        {
 
             using var scope = _services.CreateScope();
             var context = scope.ServiceProvider.GetRequiredService<BankDbContext>();

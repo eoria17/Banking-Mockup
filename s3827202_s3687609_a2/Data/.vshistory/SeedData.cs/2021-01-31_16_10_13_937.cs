@@ -52,72 +52,26 @@ namespace s3827202_s3687609_a2.Data
             }
 
 
-            var newUser = new BankDbUser
-            {
-                UserName = "s3827202@student.rmit.edu.au",
-                Email = "s3827202@student.rmit.edu.au",
-                EmailConfirmed = true,
-                CustomerID = 2100
-            };
-
-
-            //Ensure you have these values in your appsettings.json file
-            string userPWD1 = "Abc123!";
-            var _user1 = await UserManager.FindByEmailAsync(newUser.Email);
-
-            if (_user1 == null)
-            {
-                var createNewUser = await UserManager.CreateAsync(newUser, userPWD1);
-                if (createNewUser.Succeeded)
-                {
-                    //here we tie the new user to the role
-                    await UserManager.AddToRoleAsync(newUser, "Customer");
-
-                }
-            }
-
             var newUser1 = new BankDbUser
             {
-                UserName = "s3687609@student.rmit.edu.au",
+                UserName = "s3687609",
                 Email = "s3687609@student.rmit.edu.au",
                 EmailConfirmed = true,
                 CustomerID = 2200
             };
 
+
             //Ensure you have these values in your appsettings.json file
-            string userPWD2 = "Abc123!";
+            string userPWD1 = "Abc123!";
             var _user2 = await UserManager.FindByEmailAsync(newUser1.Email);
 
             if (_user2 == null)
             {
-                var createNewUser = await UserManager.CreateAsync(newUser1, userPWD2);
+                var createNewUser = await UserManager.CreateAsync(newUser1, userPWD1);
                 if (createNewUser.Succeeded)
                 {
                     //here we tie the new user to the role
                     await UserManager.AddToRoleAsync(newUser1, "Customer");
-
-                }
-            }
-
-            var newUser3 = new BankDbUser
-            {
-                UserName = "s1111111@student.rmit.edu.au",
-                Email = "s1111111@student.rmit.edu.au",
-                EmailConfirmed = true,
-                CustomerID = 2300
-            };
-
-            //Ensure you have these values in your appsettings.json file
-            string userPWD3 = "Abc123!";
-            var _user3 = await UserManager.FindByEmailAsync(newUser3.Email);
-
-            if (_user3 == null)
-            {
-                var createNewUser2 = await UserManager.CreateAsync(newUser3, userPWD3);
-                if (createNewUser2.Succeeded)
-                {
-                    //here we tie the new user to the role
-                    await UserManager.AddToRoleAsync(newUser3, "Customer");
 
                 }
             }

@@ -12,7 +12,6 @@ using s3827202_s3687609_a2.Areas.Identity.Data;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc.Authorization;
 using System.Net.Http.Headers;
-using s3827202_s3687609_a2.BackgroundServices;
 
 namespace s3827202_s3687609_a2
 {

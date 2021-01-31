@@ -20,7 +20,7 @@ namespace s3827202_s3687609_a2
                 try
                 {
                     await SeedData.Initialize(services);
-                    //await SeedData.AdminSeed(services);
+                    await SeedData.AdminSeed(services);
                 }
                 catch (Exception ex)
                 {

@@ -60,7 +60,6 @@ namespace s3827202_s3687609_a2.Data
                 CustomerID = 2100
             };
 
-
             //Ensure you have these values in your appsettings.json file
             string userPWD1 = "Abc123!";
             var _user1 = await UserManager.FindByEmailAsync(newUser.Email);
@@ -72,52 +71,6 @@ namespace s3827202_s3687609_a2.Data
                 {
                     //here we tie the new user to the role
                     await UserManager.AddToRoleAsync(newUser, "Customer");
-
-                }
-            }
-
-            var newUser1 = new BankDbUser
-            {
-                UserName = "s3687609@student.rmit.edu.au",
-                Email = "s3687609@student.rmit.edu.au",
-                EmailConfirmed = true,
-                CustomerID = 2200
-            };
-
-            //Ensure you have these values in your appsettings.json file
-            string userPWD2 = "Abc123!";
-            var _user2 = await UserManager.FindByEmailAsync(newUser1.Email);
-
-            if (_user2 == null)
-            {
-                var createNewUser = await UserManager.CreateAsync(newUser1, userPWD2);
-                if (createNewUser.Succeeded)
-                {
-                    //here we tie the new user to the role
-                    await UserManager.AddToRoleAsync(newUser1, "Customer");
-
-                }
-            }
-
-            var newUser3 = new BankDbUser
-            {
-                UserName = "s1111111@student.rmit.edu.au",
-                Email = "s1111111@student.rmit.edu.au",
-                EmailConfirmed = true,
-                CustomerID = 2300
-            };
-
-            //Ensure you have these values in your appsettings.json file
-            string userPWD3 = "Abc123!";
-            var _user3 = await UserManager.FindByEmailAsync(newUser3.Email);
-
-            if (_user3 == null)
-            {
-                var createNewUser2 = await UserManager.CreateAsync(newUser3, userPWD3);
-                if (createNewUser2.Succeeded)
-                {
-                    //here we tie the new user to the role
-                    await UserManager.AddToRoleAsync(newUser3, "Customer");
 
                 }
             }
@@ -151,7 +104,7 @@ namespace s3827202_s3687609_a2.Data
                 new Customer
                 {
                     CustomerID = 2200,
-                    CustomerName = "Shaoxuan Wei",
+                    CustomerName = "Rodney Cocker",
                     Address = "456 Real Road",
                     City = "Melbourne",
                     PostCode = "3005",
