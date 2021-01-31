@@ -90,6 +90,16 @@ namespace s3827202_s3687609_a2.Areas.Identity.Pages.Account
         {
             returnUrl ??= Url.Content("~/");
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
+
+            if (Input.AccountType == AccountType.Checking && Input.Amount < 500)
+            {
+                ModelState.AddModelError("Amount", "The minimum balance for checking account is $500");
+            }
+            if (Input.AccountType == AccountType.Saving && Input.Amount < 100) 
+            {
+                ModelState.AddModelError("Amount", "The minimum balance for saving account is $100");
+            }
+
             if (ModelState.IsValid)
             {
                 var user = new BankDbUser { UserName = Input.Email, Email = Input.Email };
