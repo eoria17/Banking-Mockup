@@ -121,7 +121,17 @@ namespace s3827202_s3687609_a2.Areas.Identity.Pages.Account
                                   AccountType = Input.AccountType,
                                   Balance = Input.Amount,
                                   ModifyDate = DateTime.Now,
-                                  FreeTransaction = 4
+                                  FreeTransaction = 4,
+                                  Transactions = new List<Transaction>()
+                                  {
+                                      new Transaction()
+                                      {
+                                          TransactionType = TransactionType.Deposit,
+                                          Amount = Input.Amount,
+                                          Comment = "Initial Deposit",
+                                          TransactionStatus = TransactionStatus.Idle
+                                      }
+                                  }
                              }
                         }
                     };
