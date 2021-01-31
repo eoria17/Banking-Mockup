@@ -1,0 +1,42 @@
+﻿
+@model List<BillViewModel>
+@{
+    ViewData["Title"] = "Bill List";
+}
+<h3>Bill List</h3>
+<table class="table">
+    <tr>
+        <th>@Html.DisplayNameFor(model => model[0].BillPayID)</th>
+        <th>@Html.DisplayNameFor(model => model[0].AccountNumber)</th>
+        <th>@Html.DisplayNameFor(model => model[0].PayeeID)</th>
+        <th>@Html.DisplayNameFor(model => model[0].Amount)</th>
+        <th>@Html.DisplayNameFor(model => model[0].ScheduleDate)</th>
+        <th>@Html.DisplayNameFor(model => model[0].Period)</th>
+        <th>@Html.DisplayNameFor(model => model[0].ModifyDate)</th>
+        <th>@Html.DisplayNameFor(model => model[0].Status)</th>      
+        <th>Action</th>
+    </tr>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>@Html.DisplayFor(x => item.BillPayID)</td>
+            <td>@Html.DisplayFor(x => item.AccountNumber)</td>
+            <td>@Html.DisplayFor(x => item.PayeeID)</td>
+            <td>@Html.DisplayFor(x => item.Amount)</td>
+            <td>@Html.DisplayFor(x => item.ScheduleDate)</td>
+            <td>@Html.DisplayFor(x => item.Period)</td>
+            <td>@Html.DisplayFor(x => item.ModifyDate)</td>
+            <td>@Html.DisplayFor(x => item.Status)</td>            
+            <td>
+                @if (item.Status == BillPayStatus.Available)
+                {
+                    <a asp-action="Lock" class="btn btn-primary" asp-route-id="@item.BillPayID">Lock</a>                   
+                }
+                @if (item.Status == BillPayStatus.Blocked)
+                {                   
+                    <a asp-action="UnLock" class="btn btn-primary" asp-route-id="@item.BillPayID">UnLock</a>
+                }
+            </td>            
+        </tr>
+    }
+</table>

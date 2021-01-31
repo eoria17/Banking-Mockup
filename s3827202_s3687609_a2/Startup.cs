@@ -11,8 +11,7 @@ using System;
 using s3827202_s3687609_a2.Areas.Identity.Data;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc.Authorization;
-using System.Security.Claims;
-using s3827202_s3687609_a2.BackgroundServices;
+using System.Net.Http.Headers;
 
 namespace s3827202_s3687609_a2
 {
@@ -31,6 +30,15 @@ namespace s3827202_s3687609_a2
             services.AddHostedService<SendEmailServices>();
             services.AddHostedService<BillPayServices>();
             services.AddControllersWithViews();
+
+            // Configure api client.
+            services.AddHttpClient("api", client =>
+            {
+                client.BaseAddress = new Uri("http://localhost:5100");
+                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+            });
+            services.AddControllersWithViews();
+
 
             services.AddDbContext<BankDbContext>(options => 
             {
