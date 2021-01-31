@@ -13,13 +13,11 @@ namespace s3827202_s3687609_a2.Common
     {
         public async Task<bool> Sendemail(EmailTemp emailTemp)
         {
-            //get email api
             var client = new SendGridClient("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");
             var from = new EmailAddress("wsx283848@qq.com", "Example User");
-            var subject = "Recent Transactions";
+            var subject = "Sending with SendGrid is Fun";
             var to = new EmailAddress(emailTemp.receiveEmail, emailTemp.receiveName);
-            var plainTextContent = "";
-            //get email format
+            var plainTextContent = "and easy to do anywhere, even with C#";
             var htmlContent = GetHtmlContent(emailTemp);
             var msg = MailHelper.CreateSingleEmail(from, to, subject, plainTextContent, htmlContent);
             var response = await client.SendEmailAsync(msg);
@@ -42,14 +40,7 @@ namespace s3827202_s3687609_a2.Common
         public string GetHtmlContent(EmailTemp emailTemp)
         {
             StringBuilder stringBuilder = new StringBuilder("");
-            if (emailTemp.balance == -1)
-            {
-                stringBuilder.Append("My Balance:  <br/>");
-            }
-            else
-            {
-                stringBuilder.Append("My Balance:" + emailTemp.balance + "   <br/>");
-            }            
+            stringBuilder.Append("My Balance:" + emailTemp.balance+ "   <br/>");
             stringBuilder.Append("receiveEmail:" + emailTemp.receiveEmail + "   <br/>");
             stringBuilder.Append("receiveName:" + emailTemp.receiveName + "   <br/>");
             stringBuilder.Append("accountID:" + emailTemp.accountID + "   <br/>");

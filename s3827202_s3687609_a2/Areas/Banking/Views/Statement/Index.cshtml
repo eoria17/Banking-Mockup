@@ -102,6 +102,8 @@
     </a>
 <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script>
+
+        //Get the parameters in the url
         function getQueryString(name) {
             var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
             var r = window.location.search.substr(1).match(reg);
@@ -118,6 +120,7 @@
             var para1 = getQueryString('AccountType');
             if (para == "") {
                 var v1 = 1;
+                //Use Ajax to get AccountNumber and Balance in the database
                 $.ajax({
                     url: "/Statement/GetAccounts",
                     type: 'GET',
@@ -144,6 +147,7 @@
                 
                 var v1 = para1;
                 $("#AccountType").val(v1);
+                //Use Ajax to get AccountNumber and Balance in the database
                 $.ajax({
                     url: "/Statement/GetAccounts",
                     type: 'GET',
@@ -175,13 +179,16 @@
             
             
         })
+
+        //Assign a value to the selected value
         $("#sub").click(function () {              
             $("#AccountNumber").val($("#AccountNumber option:selected").val());
             $("#AccountType").val($("#AccountType option:selected").val());
            
         })
         $("#AccountType").change(function (e) {
-            var v1 = $("#AccountType").val();           
+            var v1 = $("#AccountType").val();
+            //Use Ajax to get AccountNumber and Balance in the database
             $.ajax({
                 url: "/Statement/GetAccounts",
                 type: 'GET',
