@@ -63,8 +63,7 @@ namespace s3827202_s3687609_a2.BackgroundJob
                                         AccountNumber = item.AccountNumber,
                                         Amount = item.Amount,
                                         Comment = "Bill pay",
-                                        ModifyDate = datenow,
-                                        TransactionStatus = TransactionStatus.Idle
+                                        ModifyDate = datenow
                                     };
                                     context.Transaction.Add(transaction);
                                     await context.SaveChangesAsync();
@@ -102,8 +101,7 @@ namespace s3827202_s3687609_a2.BackgroundJob
                                         AccountNumber = item.AccountNumber,
                                         Amount = item.Amount,
                                         Comment = "Bill pay",
-                                        ModifyDate = datenow,
-                                        TransactionStatus = TransactionStatus.Idle
+                                        ModifyDate = datenow
                                     };
                                     context.Transaction.Add(transaction);
                                     await context.SaveChangesAsync();
@@ -140,8 +138,7 @@ namespace s3827202_s3687609_a2.BackgroundJob
                                         AccountNumber = item.AccountNumber,
                                         Amount = item.Amount,
                                         Comment = "Bill pay",
-                                        ModifyDate = datenow,
-                                        TransactionStatus = TransactionStatus.Idle
+                                        ModifyDate = datenow
                                     };
                                     context.Transaction.Add(transaction);
                                     await context.SaveChangesAsync();

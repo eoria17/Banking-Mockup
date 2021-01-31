@@ -12,7 +12,7 @@ using s3827202_s3687609_a2.Areas.Identity.Data;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc.Authorization;
 using System.Security.Claims;
-using s3827202_s3687609_a2.BackgroundServices;
+
 
 namespace s3827202_s3687609_a2
 {
@@ -28,7 +28,6 @@ namespace s3827202_s3687609_a2
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddHostedService<SendEmailServices>();
             services.AddHostedService<BillPayServices>();
             services.AddControllersWithViews();
 
@@ -116,7 +115,11 @@ namespace s3827202_s3687609_a2
                 endpoints.MapControllerRoute(
                     name: "areas",
                     pattern: "{area:exists}/{controller=Home}/{action=Index}/{id?}"
-                  );                
+                  );
+                endpoints.MapControllerRoute(
+                   name: "Banking",
+                   pattern: "{areas:exists}/{banking:exists}/{controller=Home}/{action=Index}/{id?}"
+                 );
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");

@@ -1,0 +1,206 @@
+﻿@using s3827202_s3687609_a2.Common;
+@model PaginatedList<Transaction>
+
+    @{
+        ViewData["Title"] = "Index";
+    }
+
+    <form asp-action="Index" method="get">
+        <div class="form-actions no-color">
+            <p>
+               Account Type：               
+                    <select id="AccountType" name="AccountType" value="@ViewData["AccountType"]">
+                        <option value="1">Checking</option>
+                        <option value="2">Saving</option>
+                    </select>               
+                Account Number: <select name="AccountNumber" id="AccountNumber" value="@ViewData["AccountNumber"]"></select>
+                <input type="submit" value="Search"  id="sub" class="btn btn-default" />
+            </p>
+        </div>
+        <p>My Balance:$<span id="balance"></span></p>
+    </form>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model[0].TransactionID)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model[0].TransactionType)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model[0].AccountNumber)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model[0].DestAccount)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model[0].Amount)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model[0].Comment)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model[0].ModifyDate)
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.TransactionID)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.TransactionType)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.AccountNumber)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.DestAccount)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Amount)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Comment)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem =>  item.ModifyDate)
+                    </td>
+                </tr>
+            }
+
+
+
+        </tbody>
+    </table>
+
+    @{
+        var prevDisabled = !Model.HasPreviousPage ? "disabled" : "";
+        var nextDisabled = !Model.HasNextPage ? "disabled" : "";
+    }
+
+    <a asp-action="Index"
+       asp-route-sortOrder="@ViewData["CurrentSort"]"
+       asp-route-pageNumber="@(Model.PageIndex - 1)"
+       asp-route-AccountNumber="@ViewData["AccountNumber"]"
+       asp-route-AccountType="@ViewData["AccountType"]"
+       class="btn btn-default @prevDisabled">
+        Previous
+    </a>
+    <a asp-action="Index"
+       asp-route-sortOrder="@ViewData["CurrentSort"]"
+       asp-route-pageNumber="@(Model.PageIndex + 1)"
+       asp-route-AccountNumber="@ViewData["AccountNumber"]"
+       asp-route-AccountType="@ViewData["AccountType"]"
+       class="btn btn-default @nextDisabled">
+        Next
+    </a>
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script>
+        function getQueryString(name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) {
+                return decodeURIComponent(r[2]);
+            }
+            return '';
+        }
+        $(function () {
+            if (window.location.href.substr(window.location.href.length - 1, 1) == "?") {
+                alert("There is no account under this type");
+            }
+            var para = getQueryString('AccountNumber');
+            var para1 = getQueryString('AccountType');
+            if (para == "") {
+                var v1 = 1;
+                $.ajax({
+                    url: "../Statement/GetAccounts",
+                    type: 'GET',
+                    data: {
+                        AccountType: v1
+                    },
+                    dataType: "json",
+                    success: function (data) {
+                        console.log(data);
+                        var str = null;
+                        for (i = 0; i < data.length; i++) {
+                            str += "<option value=" + data[i].AccountNumber + ">" + data[i].AccountNumber + "</option>"
+                        }
+                        $("#AccountNumber").html(str);
+                        $("#balance").html("");
+
+                    }, error: function () {
+                        alert("data error");
+                    }
+
+                })
+            }
+            else {
+                
+                var v1 = para1;
+                $("#AccountType").val(v1);
+                $.ajax({
+                    url: "../Statement/GetAccounts",
+                    type: 'GET',
+                    data: {
+                        AccountType: v1
+                    },
+                    dataType: "json",
+                    success: function (data) {
+                        console.log(data);
+                        var str = null;
+                        for (i = 0; i < data.length; i++) {
+                            str += "<option value=" + data[i].AccountNumber + ">" + data[i].AccountNumber + "</option>"
+                        }
+                        $("#AccountNumber").html(str);
+                       
+                       
+                        for (i = 0; i < data.length; i++) {
+                            if (data[i].AccountNumber == para) {
+                                $("#balance").html(data[i].Balance);
+                                $("#AccountNumber").val(data[i].AccountNumber);
+                            }
+                        }
+                    }, error: function () {
+                        alert("data error");
+                    }
+
+                })
+            }
+            
+            
+        })
+        $("#sub").click(function () {              
+            $("#AccountNumber").val($("#AccountNumber option:selected").val());
+            $("#AccountType").val($("#AccountType option:selected").val());
+           
+        })
+        $("#AccountType").change(function (e) {
+            var v1 = $("#AccountType").val();           
+            $.ajax({
+                url: "../Statement/GetAccounts",
+                type: 'GET',
+                data: {
+                    AccountType: v1
+                },
+                dataType: "json",
+                success: function (data) {
+                    console.log(data);  
+                    var str = null;
+                    for (i = 0; i < data.length; i++) {
+                        str += "<option value=" + data[i].AccountNumber + ">" + data[i].AccountNumber + "</option>"                           
+                    }
+                    $("#AccountNumber").html(str);
+                    $("#balance").html("");
+                }, error: function () {
+                    alert("data error");
+                }
+
+            })
+        });
+    </script>
