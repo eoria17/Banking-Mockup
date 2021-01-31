@@ -14,6 +14,8 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.Extensions.Logging;
 using s3827202_s3687609_a2.Areas.Identity.Data;
+using s3827202_s3687609_a2.Areas.Banking.Models;
+using s3827202_s3687609_a2.Data;
 
 namespace s3827202_s3687609_a2.Areas.Identity.Pages.Account
 {
@@ -24,17 +26,20 @@ namespace s3827202_s3687609_a2.Areas.Identity.Pages.Account
         private readonly UserManager<BankDbUser> _userManager;
         private readonly ILogger<RegisterModel> _logger;
         private readonly IEmailSender _emailSender;
+        private readonly BankDbContext _context;
 
         public RegisterModel(
             UserManager<BankDbUser> userManager,
             SignInManager<BankDbUser> signInManager,
             ILogger<RegisterModel> logger,
-            IEmailSender emailSender)
+            IEmailSender emailSender,
+            BankDbContext context)
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _logger = logger;
             _emailSender = emailSender;
+            _context = context;
         }
 
         [BindProperty]
@@ -52,6 +57,10 @@ namespace s3827202_s3687609_a2.Areas.Identity.Pages.Account
             public string Email { get; set; }
 
             [Required]
+            [Display(Name = "Full Name")]
+            public string Name { get; set; }
+
+            [Required]
             [StringLength(100, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 6)]
             [DataType(DataType.Password)]
             [Display(Name = "Password")]
@@ -61,6 +70,14 @@ namespace s3827202_s3687609_a2.Areas.Identity.Pages.Account
             [Display(Name = "Confirm password")]
             [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
             public string ConfirmPassword { get; set; }
+
+            [Required]
+            [Display(Name = "Account Type")]
+            public AccountType AccountType { get; set; }
+
+            [Required]
+            [Display(Name = "Starting Balance")]
+            public decimal Amount { get; set; }
         }
 
         public async Task OnGetAsync(string returnUrl = null)
@@ -80,6 +97,39 @@ namespace s3827202_s3687609_a2.Areas.Identity.Pages.Account
                 if (result.Succeeded)
                 {
                     _logger.LogInformation("User created a new account with password.");
+                    await _userManager.AddToRoleAsync(user, "Customer");
+
+                    //Create a new Customer
+                    var bankUser = _context.Users.Where(x => x.Email == Input.Email).FirstOrDefault();
+
+                    //for testing purposes
+                    int _min = 1000;
+                    int _max = 9999;
+                    Random _rdm = new Random();
+
+                    bankUser.Customer = new Customer()
+                    {
+                        CustomerID = _rdm.Next(_min, _max),
+                        CustomerName = Input.Name,
+                        Phone = "+6112345678",
+                        Status = CustomerStatus.Unlocked,
+                        Accounts = new List<s3827202_s3687609_a2.Areas.Banking.Models.Account>()
+                        {
+                             new s3827202_s3687609_a2.Areas.Banking.Models.Account
+                             {
+                                  AccountNumber = _rdm.Next(_min, _max),
+                                  AccountType = Input.AccountType,
+                                  Balance = Input.Amount,
+                                  ModifyDate = DateTime.Now,
+                                  FreeTransaction = 4
+                             }
+                        }
+                    };
+
+                    await _context.SaveChangesAsync();
+                    //bankUser.CustomerID = bankUser.Customer.CustomerID;
+
+                    
 
                     var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
                     code = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(code));
