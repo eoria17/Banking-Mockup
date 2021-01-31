@@ -102,8 +102,7 @@ namespace s3827202_s3687609_a2.Controllers
                         TransactionType = TransactionType.Deposit,
                         Amount = amount,
                         Comment = comment,
-                        ModifyDate = DateTime.UtcNow,
-                        TransactionStatus = TransactionStatus.Idle
+                        ModifyDate = DateTime.UtcNow
                     });
 
                 await _context.SaveChangesAsync();
@@ -122,8 +121,7 @@ namespace s3827202_s3687609_a2.Controllers
                         TransactionType = TransactionType.Withdrawal,
                         Amount = amount,
                         Comment = comment,
-                        ModifyDate = DateTime.UtcNow,
-                        TransactionStatus = TransactionStatus.Idle
+                        ModifyDate = DateTime.UtcNow
                     });
                 if (account.FreeTransaction == 0)
                 {
@@ -133,8 +131,7 @@ namespace s3827202_s3687609_a2.Controllers
                         TransactionType = TransactionType.ServiceCharge,
                         Amount = serviceCharge,
                         Comment = "service Charge",
-                        ModifyDate = DateTime.UtcNow,
-                        TransactionStatus = TransactionStatus.Idle
+                        ModifyDate = DateTime.UtcNow
                     });
                 }
 
@@ -153,8 +150,7 @@ namespace s3827202_s3687609_a2.Controllers
                         TransactionType = TransactionType.Transfer,
                         Amount = amount,
                         Comment = comment,
-                        ModifyDate = DateTime.UtcNow,
-                        TransactionStatus = TransactionStatus.Idle
+                        ModifyDate = DateTime.UtcNow
                     });
                 if (account.FreeTransaction == 0)
                 {
@@ -164,8 +160,7 @@ namespace s3827202_s3687609_a2.Controllers
                         TransactionType = TransactionType.ServiceCharge,
                         Amount = serviceCharge,
                         Comment = "service Charge",
-                        ModifyDate = DateTime.UtcNow,
-                        TransactionStatus = TransactionStatus.Idle
+                        ModifyDate = DateTime.UtcNow
                     });
                 }
                 var destinationAccount = await _context.Account.FindAsync(destAccount);
@@ -178,8 +173,7 @@ namespace s3827202_s3687609_a2.Controllers
                         TransactionType = TransactionType.Transfer,
                         Amount = amount,
                         Comment = comment,
-                        ModifyDate = DateTime.UtcNow,
-                        TransactionStatus = TransactionStatus.Idle
+                        ModifyDate = DateTime.UtcNow
                     });
 
                 await _context.SaveChangesAsync();

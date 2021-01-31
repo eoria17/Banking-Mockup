@@ -15,7 +15,7 @@ namespace IdentityApp.Models
 
     public enum TransactionStatus
     {
-        Idle = 1,//Unpeported
+        Idle = 1,
         Reported = 2
     }
 

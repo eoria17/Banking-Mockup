@@ -9,7 +9,7 @@ using s3827202_s3687609_a2.BackgroundJob;
 using Microsoft.AspNetCore.Identity;
 using System;
 using s3827202_s3687609_a2.Areas.Identity.Data;
-using s3827202_s3687609_a2.BackgroundServices;
+
 
 namespace s3827202_s3687609_a2
 {
@@ -26,7 +26,6 @@ namespace s3827202_s3687609_a2
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddHostedService<BillPayServices>();
-            services.AddHostedService<SendEmailServices>();
             services.AddControllersWithViews();
 
             services.AddDbContext<BankDbContext>(options => 
