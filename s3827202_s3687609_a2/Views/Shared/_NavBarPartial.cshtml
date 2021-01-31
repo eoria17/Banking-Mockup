@@ -12,4 +12,24 @@
     <li class="nav-item">
         <a class="nav-link text-dark" asp-area="Banking" asp-controller="Atm" asp-action="AtmTransaction">Atm Transaction</a>
     </li>
+    <li class="nav-item">
+        <a class="nav-link text-dark" asp-area="Banking" asp-controller="Statement" asp-action="GetAccounts">My Statements</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link text-dark" asp-area="Banking" asp-controller="BillPay" asp-action="Index">Atm Transaction</a>
+    </li>
+}
+else if (SignInManager.IsSignedIn(User) && User.IsInRole("Customer"))
+{
+    <li class="nav-item">
+        <a class="nav-link text-dark" asp-area="Admin" asp-controller="TransactionHistory" asp-action="Index">Transaction Management</a>
+    </li>
+
+    <li class="nav-item">
+        <a class="nav-link text-dark" asp-area="Admin" asp-controller="CustomerLock" asp-action="Index">Customer Management</a>
+    </li>
+
+    <li class="nav-item">
+        <a class="nav-link text-dark" asp-area="Admin" asp-controller="BillPay" asp-action="Index">Bill Management</a>
+    </li>
 }

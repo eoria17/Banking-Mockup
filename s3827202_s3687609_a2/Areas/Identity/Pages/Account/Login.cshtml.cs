@@ -85,7 +85,10 @@ namespace s3827202_s3687609_a2.Areas.Identity.Pages.Account
                 if (result.Succeeded)
                 {
                     _logger.LogInformation("User logged in.");
+
                     return RedirectToAction("Index", "Customer", new { area = "Banking" });
+                    
+                    
                 }
                 if (result.RequiresTwoFactor)
                 {
