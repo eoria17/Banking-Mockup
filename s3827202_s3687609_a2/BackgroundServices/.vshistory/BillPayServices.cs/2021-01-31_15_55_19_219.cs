@@ -55,7 +55,6 @@ namespace s3827202_s3687609_a2.BackgroundJob
                                 {
                                     //pay over
                                 }
-                                //Store billpay records and update balance and account status
                                 else
                                 {
                                     Transaction transaction = new Transaction()
@@ -77,8 +76,6 @@ namespace s3827202_s3687609_a2.BackgroundJob
                                 }
                             }
                         }
-
-                        //According to the month, store billpay records, and update the balance and account status
                         else if (item.Period == Period.Monthly)
                         {
                             var date = item.ScheduleDate;
@@ -117,8 +114,6 @@ namespace s3827202_s3687609_a2.BackgroundJob
                             }
 
                         }
-
-                        //According to the quarter, store billpay records, and update the balance and account status
                         else
                         {
                             var date = item.ScheduleDate;

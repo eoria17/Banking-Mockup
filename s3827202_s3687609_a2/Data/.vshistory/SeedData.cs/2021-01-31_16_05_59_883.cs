@@ -54,10 +54,10 @@ namespace s3827202_s3687609_a2.Data
 
             var newUser = new BankDbUser
             {
-                UserName = "s3827202@student.rmit.edu.au",
-                Email = "s3827202@student.rmit.edu.au",
+                UserName = "s3687609",
+                Email = "s3687609@student.rmit.edu.au",
                 EmailConfirmed = true,
-                CustomerID = 2100
+                CustomerID = 2200
             };
 
 
@@ -72,52 +72,6 @@ namespace s3827202_s3687609_a2.Data
                 {
                     //here we tie the new user to the role
                     await UserManager.AddToRoleAsync(newUser, "Customer");
-
-                }
-            }
-
-            var newUser1 = new BankDbUser
-            {
-                UserName = "s3687609@student.rmit.edu.au",
-                Email = "s3687609@student.rmit.edu.au",
-                EmailConfirmed = true,
-                CustomerID = 2200
-            };
-
-            //Ensure you have these values in your appsettings.json file
-            string userPWD2 = "Abc123!";
-            var _user2 = await UserManager.FindByEmailAsync(newUser1.Email);
-
-            if (_user2 == null)
-            {
-                var createNewUser = await UserManager.CreateAsync(newUser1, userPWD2);
-                if (createNewUser.Succeeded)
-                {
-                    //here we tie the new user to the role
-                    await UserManager.AddToRoleAsync(newUser1, "Customer");
-
-                }
-            }
-
-            var newUser3 = new BankDbUser
-            {
-                UserName = "s1111111@student.rmit.edu.au",
-                Email = "s1111111@student.rmit.edu.au",
-                EmailConfirmed = true,
-                CustomerID = 2300
-            };
-
-            //Ensure you have these values in your appsettings.json file
-            string userPWD3 = "Abc123!";
-            var _user3 = await UserManager.FindByEmailAsync(newUser3.Email);
-
-            if (_user3 == null)
-            {
-                var createNewUser2 = await UserManager.CreateAsync(newUser3, userPWD3);
-                if (createNewUser2.Succeeded)
-                {
-                    //here we tie the new user to the role
-                    await UserManager.AddToRoleAsync(newUser3, "Customer");
 
                 }
             }
@@ -231,8 +185,7 @@ namespace s3827202_s3687609_a2.Data
                     AccountNumber = 4100,
                     Amount = 100,
                     Comment = initialDeposit,
-                    ModifyDate = DateTime.ParseExact("08/06/2020 08:00:00 PM", format, null),
-                    TransactionStatus=TransactionStatus.Idle
+                    ModifyDate = DateTime.ParseExact("08/06/2020 08:00:00 PM", format, null)
                 },
                 new Transaction
                 {
@@ -240,8 +193,7 @@ namespace s3827202_s3687609_a2.Data
                     AccountNumber = 4100,
                     Amount = 100,
                     Comment = initialDeposit,
-                    ModifyDate = DateTime.ParseExact("09/06/2020 09:00:00 AM", format, null),
-                    TransactionStatus = TransactionStatus.Idle
+                    ModifyDate = DateTime.ParseExact("09/06/2020 09:00:00 AM", format, null)
                 },
                 new Transaction
                 {
@@ -249,8 +201,7 @@ namespace s3827202_s3687609_a2.Data
                     AccountNumber = 4100,
                     Amount = 100,
                     Comment = initialDeposit,
-                    ModifyDate = DateTime.ParseExact("09/06/2020 01:00:00 PM", format, null),
-                    TransactionStatus = TransactionStatus.Idle
+                    ModifyDate = DateTime.ParseExact("09/06/2020 01:00:00 PM", format, null)
                 },
                 new Transaction
                 {
@@ -258,8 +209,7 @@ namespace s3827202_s3687609_a2.Data
                     AccountNumber = 4100,
                     Amount = 100,
                     Comment = initialDeposit,
-                    ModifyDate = DateTime.ParseExact("09/06/2020 03:00:00 PM", format, null),
-                    TransactionStatus = TransactionStatus.Idle
+                    ModifyDate = DateTime.ParseExact("09/06/2020 03:00:00 PM", format, null)
                 },
                 new Transaction
                 {
@@ -267,8 +217,7 @@ namespace s3827202_s3687609_a2.Data
                     AccountNumber = 4100,
                     Amount = 100,
                     Comment = initialDeposit,
-                    ModifyDate = DateTime.ParseExact("10/06/2020 11:00:00 AM", format, null),
-                    TransactionStatus = TransactionStatus.Idle
+                    ModifyDate = DateTime.ParseExact("10/06/2020 11:00:00 AM", format, null)
                 },
                 new Transaction
                 {
@@ -276,8 +225,7 @@ namespace s3827202_s3687609_a2.Data
                     AccountNumber = 4101,
                     Amount = 500,
                     Comment = initialDeposit,
-                    ModifyDate = DateTime.ParseExact("08/06/2020 08:30:00 PM", format, null),
-                    TransactionStatus = TransactionStatus.Idle
+                    ModifyDate = DateTime.ParseExact("08/06/2020 08:30:00 PM", format, null)
                 },
                 new Transaction
                 {
@@ -285,8 +233,7 @@ namespace s3827202_s3687609_a2.Data
                     AccountNumber = 4200,
                     Amount = 500,
                     Comment = initialDeposit,
-                    ModifyDate = DateTime.ParseExact("08/06/2020 09:00:00 PM", format, null),
-                    TransactionStatus = TransactionStatus.Idle
+                    ModifyDate = DateTime.ParseExact("08/06/2020 09:00:00 PM", format, null)
                 },
                 new Transaction
                 {
@@ -294,8 +241,7 @@ namespace s3827202_s3687609_a2.Data
                     AccountNumber = 4200,
                     Amount = 0.95m,
                     Comment = initialDeposit,
-                    ModifyDate = DateTime.ParseExact("08/06/2020 09:00:00 PM", format, null),
-                    TransactionStatus = TransactionStatus.Idle
+                    ModifyDate = DateTime.ParseExact("08/06/2020 09:00:00 PM", format, null)
                 },
                 new Transaction
                 {
@@ -303,8 +249,7 @@ namespace s3827202_s3687609_a2.Data
                     AccountNumber = 4300,
                     Amount = 1250.50m,
                     Comment = initialDeposit,
-                    ModifyDate = DateTime.ParseExact("08/06/2020 10:00:00 PM", format, null),
-                    TransactionStatus = TransactionStatus.Idle
+                    ModifyDate = DateTime.ParseExact("08/06/2020 10:00:00 PM", format, null)
                 });
 
             context.Payee.AddRange(

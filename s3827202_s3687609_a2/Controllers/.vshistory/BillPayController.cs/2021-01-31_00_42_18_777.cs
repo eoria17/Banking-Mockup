@@ -3,36 +3,26 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using s3827202_s3687609_a2.Data;
 using s3827202_s3687609_a2.Filters;
-using s3827202_s3687609_a2.Areas.Banking.Models;
+using s3827202_s3687609_a2.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Identity;
-using s3827202_s3687609_a2.Areas.Identity.Data;
 
 namespace s3827202_s3687609_a2.Controllers
 {
-    [Area("Banking")]
-    [Authorize(Roles = "Customer")]
+    [AuthorizeCustomer]
     public class BillPayController : Controller
     {
         private readonly BankDbContext _context;
-        private readonly UserManager<BankDbUser> _userManager;
-
-        public BillPayController(BankDbContext context, UserManager<BankDbUser> userManager)
+        private int CustomerID => HttpContext.Session.GetInt32(nameof(Customer.CustomerID)).Value;
+        public BillPayController(BankDbContext context)
         {
             _context = context;
-            _userManager = userManager;
-
         } 
-        public async Task<IActionResult> Index()
+        public IActionResult Index()
         {
-            var user = await _userManager.GetUserAsync(User);
-            var CustomerID = user.CustomerID.Value;
-            
             var billPays = _context.Account.
                 Where(x => x.CustomerID == CustomerID).
                 Select(x => x.BillPays).SelectMany(x => x).ToList();
@@ -40,11 +30,8 @@ namespace s3827202_s3687609_a2.Controllers
             return View(billPays);
         }
         // GET: BillPay/Create
-        public async Task<IActionResult> Create()
-        {
-            var user = await _userManager.GetUserAsync(User);
-            var CustomerID = user.CustomerID.Value;
-
+        public IActionResult Create()
+        {           
             ViewData["AccountNumber"] = new SelectList(_context.Account.Where(a => a.CustomerID == CustomerID), "AccountNumber", "AccountNumber");
             ViewData["PayeeID"] = new SelectList(_context.Payee.Where(x=>x.PayeeID>0), "PayeeID", "PayeeName");
             return View();
@@ -52,21 +39,18 @@ namespace s3827202_s3687609_a2.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(BillPay billPay)
-        {
-            //Model verification
+        {           
             if (ModelState.IsValid)
             {
-                //Determine the transfer amount
                 if (_context.Account.Where(x=>x.AccountNumber==billPay.AccountNumber).FirstOrDefault().Balance > billPay.Amount&&billPay.Amount>0)
                 {
-                    //Determine date
                     if (billPay.ScheduleDate < Convert.ToDateTime(DateTime.Now.ToString("yyyy-MM-dd")))
                     {
                         ModelState.AddModelError(nameof(billPay.ScheduleDate), "Invaild data time.");
                     }
                     else
                     {
-                        //Add billpay to the database
+                        ViewData["ErrorMessage"] = "";
                         billPay.ModifyDate = DateTime.UtcNow;
                         billPay.Status = BillPayStatus.Available;
                         _context.Add(billPay);
@@ -79,9 +63,7 @@ namespace s3827202_s3687609_a2.Controllers
                     ModelState.AddModelError(nameof(billPay.Amount), "Not enough money or invaild amount.");                   
                 }
             }
-            var user = await _userManager.GetUserAsync(User);
-            var CustomerID = user.CustomerID.Value;
-
+           
             ViewData["AccountNumber"] = new SelectList(_context.Account.Where(a => a.CustomerID == CustomerID), "AccountNumber", "AccountNumber");
             ViewData["PayeeID"] = new SelectList(_context.Payee.Where(x => x.PayeeID > 0), "PayeeID", "PayeeName");
             return View(billPay);

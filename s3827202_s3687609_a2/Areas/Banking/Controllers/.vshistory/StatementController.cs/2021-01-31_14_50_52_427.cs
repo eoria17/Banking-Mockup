@@ -34,15 +34,12 @@ namespace s3827202_s3687609_a2.Controllers
             public decimal Balance { get; set; }          
         }
         [HttpGet]
-        [Route("/Statement/GetAccounts")]
         public async Task<string> GetAccounts(int AccountType)
         {
             var user = await _userManager.GetUserAsync(User);
             var CustomerID = user.CustomerID.Value;
 
             List<Account> list = new List<Account>();
-
-            //According to the account type, get the current account and balance
             if (AccountType == 1)
             {
                 list = _context.Account.Where(x => x.AccountType == s3827202_s3687609_a2.Areas.Banking.Models.AccountType.Checking &&x.CustomerID== CustomerID).ToList();
@@ -57,7 +54,6 @@ namespace s3827202_s3687609_a2.Controllers
         // GET: StatementController
         public async Task<IActionResult> Index(string searchString, string AccountNumber,string AccountType,int? pageNumber)   
         {
-            
             if (searchString != null)
             {
                 pageNumber = 1;
@@ -71,8 +67,6 @@ namespace s3827202_s3687609_a2.Controllers
            
             var transactions = from s in _context.Transaction
                            select s;
-
-            //Determine whether the account is empty
             if (!String.IsNullOrEmpty(AccountNumber))
             {
                 transactions = transactions.Where(s => s.AccountNumber == Convert.ToInt32(AccountNumber));
@@ -81,10 +75,8 @@ namespace s3827202_s3687609_a2.Controllers
             {
                 transactions = transactions.Where(s => s.AccountNumber == -1);
             }
-            int pageSize = 4;
-
-            //Call paging method
-            return View(await PaginatedList<Transaction>.CreateAsync(transactions.OrderByDescending(x=>x.ModifyDate).AsNoTracking(), pageNumber ?? 1, pageSize));
+            int pageSize = 4;           
+            return View(await PaginatedList<Transaction>.CreateAsync(transactions.AsNoTracking(), pageNumber ?? 1, pageSize));
 
         }
        

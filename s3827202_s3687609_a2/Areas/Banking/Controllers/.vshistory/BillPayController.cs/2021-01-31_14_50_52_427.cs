@@ -32,7 +32,7 @@ namespace s3827202_s3687609_a2.Controllers
         {
             var user = await _userManager.GetUserAsync(User);
             var CustomerID = user.CustomerID.Value;
-            
+
             var billPays = _context.Account.
                 Where(x => x.CustomerID == CustomerID).
                 Select(x => x.BillPays).SelectMany(x => x).ToList();
@@ -52,21 +52,18 @@ namespace s3827202_s3687609_a2.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(BillPay billPay)
-        {
-            //Model verification
+        {           
             if (ModelState.IsValid)
             {
-                //Determine the transfer amount
                 if (_context.Account.Where(x=>x.AccountNumber==billPay.AccountNumber).FirstOrDefault().Balance > billPay.Amount&&billPay.Amount>0)
                 {
-                    //Determine date
                     if (billPay.ScheduleDate < Convert.ToDateTime(DateTime.Now.ToString("yyyy-MM-dd")))
                     {
                         ModelState.AddModelError(nameof(billPay.ScheduleDate), "Invaild data time.");
                     }
                     else
                     {
-                        //Add billpay to the database
+                        ViewData["ErrorMessage"] = "";
                         billPay.ModifyDate = DateTime.UtcNow;
                         billPay.Status = BillPayStatus.Available;
                         _context.Add(billPay);
