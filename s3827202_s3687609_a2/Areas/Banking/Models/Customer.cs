@@ -10,7 +10,9 @@ namespace s3827202_s3687609_a2.Areas.Banking.Models
         Locked = 1,
         Unlocked = 2
     }
-
+    // Since Customer's data is not frequently changed and it is used as the hub of the entities that has many connections
+    // to other entities hence records is used for this model. Furthermore, records improves the system efficiency and helps the system
+    // to maintain this entity.
     public record Customer
     {
         [DatabaseGenerated(DatabaseGeneratedOption.None)]

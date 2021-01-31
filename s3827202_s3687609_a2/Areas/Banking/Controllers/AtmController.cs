@@ -79,6 +79,10 @@ namespace s3827202_s3687609_a2.Controllers
                 ModelState.AddModelError(nameof(destAccount), "Please select a destination account");
             if (transactionTypeVM == TransactionTypeVM.Withdrawal && account.Balance - (amount + serviceCharge) < 0.0m)
                 ModelState.AddModelError(nameof(amount), "Insufficient balance.");
+            if (transactionTypeVM != TransactionTypeVM.Transfer && destAccount != null)
+            {
+                ModelState.AddModelError(nameof(destAccount), "Deposit/Withdraw doesn't need a destination account.");
+            }
             if (!ModelState.IsValid)
             {
                 var sourceAccounts = _context.Account.Where(x => x.CustomerID == CustomerID).
