@@ -45,17 +45,14 @@ namespace s3827202_s3687609_a2.Common
             stringBuilder.Append("receiveName:" + emailTemp.receiveName + "   <br/>");
             stringBuilder.Append("accountID:" + emailTemp.accountID + "   <br/>");
             stringBuilder.Append("customerAddress:" + emailTemp.customerAddress + "   <br/>");
-            stringBuilder.Append("<table><tr><th>AccountNumber</th><th>DestAccount</th><th>Amount</th><th>ModifyDate</th><th>Comment</th></tr>");
             foreach (var item in emailTemp.transactions)
             {
-                stringBuilder.Append("<tr>");
-                stringBuilder.Append("<td>" + item.AccountNumber+"</td>");
-                stringBuilder.Append("<td>" + item.DestAccount + "</td>");
-                stringBuilder.Append("<td>" + item.Amount + "</td>");
-                stringBuilder.Append("<td>" + item.ModifyDate + "</td>");
-                stringBuilder.Append("<td>" + item.Comment + "</td>");                
+                stringBuilder.Append("AccountNumber:" + item.AccountNumber + "   <br/>");
+                stringBuilder.Append("DestAccount:" + item.DestAccount + "   <br/>");
+                stringBuilder.Append("Amount:" + item.Amount + "   <br/>");
+                stringBuilder.Append("ModifyDate:" + item.ModifyDate + "   <br/>");
+                stringBuilder.Append("Comment:" + item.Comment + "   <br/>");                
             }
-            stringBuilder.Append("</table>");
             return stringBuilder.ToString();
         }
     }

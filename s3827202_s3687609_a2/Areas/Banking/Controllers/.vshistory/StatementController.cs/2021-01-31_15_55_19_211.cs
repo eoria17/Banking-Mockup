@@ -77,7 +77,7 @@ namespace s3827202_s3687609_a2.Controllers
                 transactions = transactions.Where(s => s.AccountNumber == -1);
             }
             int pageSize = 4;           
-            return View(await PaginatedList<Transaction>.CreateAsync(transactions.OrderByDescending(x=>x.ModifyDate).AsNoTracking(), pageNumber ?? 1, pageSize));
+            return View(await PaginatedList<Transaction>.CreateAsync(transactions.AsNoTracking(), pageNumber ?? 1, pageSize));
 
         }
        
