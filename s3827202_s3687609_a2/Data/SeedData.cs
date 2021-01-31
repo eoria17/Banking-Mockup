@@ -80,7 +80,7 @@ namespace s3827202_s3687609_a2.Data
                 UserName = "s3687609@student.rmit.edu.au",
                 Email = "s3687609@student.rmit.edu.au",
                 EmailConfirmed = true,
-                CustomerID = 2100
+                CustomerID = 2200
             };
 
             //Ensure you have these values in your appsettings.json file
@@ -129,7 +129,7 @@ namespace s3827202_s3687609_a2.Data
                 new Customer
                 {
                     CustomerID = 2200,
-                    CustomerName = "Rodney Cocker",
+                    CustomerName = "Shaoxuan Wei",
                     Address = "456 Real Road",
                     City = "Melbourne",
                     PostCode = "3005",
