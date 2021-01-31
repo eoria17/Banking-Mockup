@@ -224,7 +224,7 @@ namespace s3827202_s3687609_a2.Migrations
                     b.ToTable("AspNetUsers");
                 });
 
-            modelBuilder.Entity("s3827202_s3687609_a2.Models.Account", b =>
+            modelBuilder.Entity("s3827202_s3687609_a2.Areas.Banking.Models.Account", b =>
                 {
                     b.Property<int>("AccountNumber")
                         .HasColumnType("int");
@@ -255,7 +255,7 @@ namespace s3827202_s3687609_a2.Migrations
                     b.HasCheckConstraint("CH_Transaction_Quota", "FreeTransaction >= 0");
                 });
 
-            modelBuilder.Entity("s3827202_s3687609_a2.Models.BillPay", b =>
+            modelBuilder.Entity("s3827202_s3687609_a2.Areas.Banking.Models.BillPay", b =>
                 {
                     b.Property<int>("BillPayID")
                         .ValueGeneratedOnAdd()
@@ -292,7 +292,7 @@ namespace s3827202_s3687609_a2.Migrations
                     b.ToTable("BillPay");
                 });
 
-            modelBuilder.Entity("s3827202_s3687609_a2.Models.Customer", b =>
+            modelBuilder.Entity("s3827202_s3687609_a2.Areas.Banking.Models.Customer", b =>
                 {
                     b.Property<int>("CustomerID")
                         .HasColumnType("int");
@@ -335,7 +335,7 @@ namespace s3827202_s3687609_a2.Migrations
                     b.ToTable("Customer");
                 });
 
-            modelBuilder.Entity("s3827202_s3687609_a2.Models.Payee", b =>
+            modelBuilder.Entity("s3827202_s3687609_a2.Areas.Banking.Models.Payee", b =>
                 {
                     b.Property<int>("PayeeID")
                         .ValueGeneratedOnAdd()
@@ -373,7 +373,7 @@ namespace s3827202_s3687609_a2.Migrations
                     b.ToTable("Payee");
                 });
 
-            modelBuilder.Entity("s3827202_s3687609_a2.Models.Transaction", b =>
+            modelBuilder.Entity("s3827202_s3687609_a2.Areas.Banking.Models.Transaction", b =>
                 {
                     b.Property<int>("TransactionID")
                         .ValueGeneratedOnAdd()
@@ -467,16 +467,16 @@ namespace s3827202_s3687609_a2.Migrations
 
             modelBuilder.Entity("s3827202_s3687609_a2.Areas.Identity.Data.BankDbUser", b =>
                 {
-                    b.HasOne("s3827202_s3687609_a2.Models.Customer", "Customer")
+                    b.HasOne("s3827202_s3687609_a2.Areas.Banking.Models.Customer", "Customer")
                         .WithMany()
                         .HasForeignKey("CustomerID");
 
                     b.Navigation("Customer");
                 });
 
-            modelBuilder.Entity("s3827202_s3687609_a2.Models.Account", b =>
+            modelBuilder.Entity("s3827202_s3687609_a2.Areas.Banking.Models.Account", b =>
                 {
-                    b.HasOne("s3827202_s3687609_a2.Models.Customer", "Customer")
+                    b.HasOne("s3827202_s3687609_a2.Areas.Banking.Models.Customer", "Customer")
                         .WithMany("Accounts")
                         .HasForeignKey("CustomerID")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -485,15 +485,15 @@ namespace s3827202_s3687609_a2.Migrations
                     b.Navigation("Customer");
                 });
 
-            modelBuilder.Entity("s3827202_s3687609_a2.Models.BillPay", b =>
+            modelBuilder.Entity("s3827202_s3687609_a2.Areas.Banking.Models.BillPay", b =>
                 {
-                    b.HasOne("s3827202_s3687609_a2.Models.Account", "Account")
+                    b.HasOne("s3827202_s3687609_a2.Areas.Banking.Models.Account", "Account")
                         .WithMany("BillPays")
                         .HasForeignKey("AccountNumber")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("s3827202_s3687609_a2.Models.Payee", "Payee")
+                    b.HasOne("s3827202_s3687609_a2.Areas.Banking.Models.Payee", "Payee")
                         .WithMany()
                         .HasForeignKey("PayeeID")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -504,15 +504,15 @@ namespace s3827202_s3687609_a2.Migrations
                     b.Navigation("Payee");
                 });
 
-            modelBuilder.Entity("s3827202_s3687609_a2.Models.Transaction", b =>
+            modelBuilder.Entity("s3827202_s3687609_a2.Areas.Banking.Models.Transaction", b =>
                 {
-                    b.HasOne("s3827202_s3687609_a2.Models.Account", "SourceAccount")
+                    b.HasOne("s3827202_s3687609_a2.Areas.Banking.Models.Account", "SourceAccount")
                         .WithMany("Transactions")
                         .HasForeignKey("AccountNumber")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("s3827202_s3687609_a2.Models.Account", "DestinationAccount")
+                    b.HasOne("s3827202_s3687609_a2.Areas.Banking.Models.Account", "DestinationAccount")
                         .WithMany()
                         .HasForeignKey("DestAccount");
 
@@ -521,14 +521,14 @@ namespace s3827202_s3687609_a2.Migrations
                     b.Navigation("SourceAccount");
                 });
 
-            modelBuilder.Entity("s3827202_s3687609_a2.Models.Account", b =>
+            modelBuilder.Entity("s3827202_s3687609_a2.Areas.Banking.Models.Account", b =>
                 {
                     b.Navigation("BillPays");
 
                     b.Navigation("Transactions");
                 });
 
-            modelBuilder.Entity("s3827202_s3687609_a2.Models.Customer", b =>
+            modelBuilder.Entity("s3827202_s3687609_a2.Areas.Banking.Models.Customer", b =>
                 {
                     b.Navigation("Accounts");
                 });

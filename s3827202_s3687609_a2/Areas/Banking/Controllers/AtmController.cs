@@ -4,26 +4,37 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using s3827202_s3687609_a2.Data;
-using s3827202_s3687609_a2.Models;
+using s3827202_s3687609_a2.Areas.Banking.Models;
 using s3827202_s3687609_a2.ViewModel;
 using s3827202_s3687609_a2.Filters;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using s3827202_s3687609_a2.Utilities;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
+using s3827202_s3687609_a2.Areas.Identity.Data;
 
 namespace s3827202_s3687609_a2.Controllers
 {
-    [AuthorizeCustomer]
+    [Area("Banking")]
+    [Authorize(Roles = "Customer")]
     public class AtmController : Controller
     {
         private readonly BankDbContext _context;
 
-        private int CustomerID => HttpContext.Session.GetInt32(nameof(Customer.CustomerID)).Value;
+        private readonly UserManager<BankDbUser> _userManager;
 
-        public AtmController(BankDbContext context) => _context = context;
 
-        public IActionResult AtmTransaction()
+        public AtmController(BankDbContext context, UserManager<BankDbUser> userManager) {
+            _context = context;
+            _userManager = userManager;
+        } 
+
+        public async Task<IActionResult> AtmTransaction()
         {
+            var user = await _userManager.GetUserAsync(User);
+            var CustomerID = user.CustomerID.Value;
+
             var sourceAccounts = _context.Account.Where(x => x.CustomerID == CustomerID).
                 Select(x => new SelectListItem() {
                     Text = x.AccountNumber.ToString(),
@@ -49,8 +60,12 @@ namespace s3827202_s3687609_a2.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> AtmTransaction(decimal amount, TransactionTypeVM transactionTypeVM, int sourceAccount, int? destAccount, string comment)
         {
+            var user = await _userManager.GetUserAsync(User);
+            var CustomerID = user.CustomerID.Value;
+
             var account = await _context.Account.FindAsync(sourceAccount);
             var serviceCharge = account.FreeTransaction == 0 ? 0.2m : 0.0m;
 

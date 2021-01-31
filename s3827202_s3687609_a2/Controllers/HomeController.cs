@@ -1,9 +1,11 @@
 ﻿using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
-using s3827202_s3687609_a2.Models;
+using s3827202_s3687609_a2.ViewModel;
+using Microsoft.AspNetCore.Authorization;
 
 namespace s3827202_s3687609_a2.Controllers
 {
+    [AllowAnonymous]
     public class HomeController : Controller
     {
         public IActionResult Index() => View();

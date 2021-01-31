@@ -1,25 +1,34 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
 using s3827202_s3687609_a2.Data;
-using s3827202_s3687609_a2.Models;
+using s3827202_s3687609_a2.Areas.Banking.Models;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
+using s3827202_s3687609_a2.Areas.Identity.Data;
+using System.Security.Claims;
 using s3827202_s3687609_a2.Utilities;
-using s3827202_s3687609_a2.Filters;
 
-namespace s3827202_s3687609_a2.Controllers
+namespace s3827202_s3687609_a2.Areas.Banking.Controllers
 {
-    [AuthorizeCustomer]
+    [Area("Banking")]
+    [Authorize(Roles = "Customer")]
     public class CustomerController : Controller
     {
         private readonly BankDbContext _context;
+        private readonly UserManager<BankDbUser> _userManager;
 
-        private int CustomerID => HttpContext.Session.GetInt32(nameof(Customer.CustomerID)).Value;
-
-        public CustomerController(BankDbContext context) => _context = context;
+        public CustomerController(BankDbContext context, UserManager<BankDbUser> userManager)
+        {
+            _context = context;
+            _userManager = userManager;
+        }
 
         public async Task<IActionResult> Index()
         {
+            var user = await _userManager.GetUserAsync(User);
+            var CustomerID = user.CustomerID.Value;
+
             // Lazy loading.
             // The Customer.Accounts property will be lazy loaded upon demand.
             var customer = await _context.Customer.FindAsync(CustomerID);

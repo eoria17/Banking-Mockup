@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using s3827202_s3687609_a2.Models;
+using s3827202_s3687609_a2.Areas.Banking.Models;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using System.ComponentModel.DataAnnotations;
 

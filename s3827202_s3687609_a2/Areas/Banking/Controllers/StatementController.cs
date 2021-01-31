@@ -10,36 +10,43 @@ using Newtonsoft.Json;
 using s3827202_s3687609_a2.Common;
 using s3827202_s3687609_a2.Data;
 using s3827202_s3687609_a2.Filters;
-using s3827202_s3687609_a2.Models;
+using s3827202_s3687609_a2.Areas.Banking.Models;
+using Microsoft.AspNetCore.Authorization;
+using s3827202_s3687609_a2.Areas.Identity.Data;
+using Microsoft.AspNetCore.Identity;
 
 
 namespace s3827202_s3687609_a2.Controllers
 {
-    [AuthorizeCustomer]
+    [Area("Banking")]
+    [Authorize(Roles = "Customer")]
     public class StatementController : Controller
     {
         private readonly BankDbContext _context;
-
-        private int CustomerID => HttpContext.Session.GetInt32(nameof(Customer.CustomerID)).Value;
-        public StatementController(BankDbContext context)
+        private readonly UserManager<BankDbUser> _userManager;
+        public StatementController(BankDbContext context, UserManager<BankDbUser> userManager)
         {
             _context = context;
+            _userManager = userManager;
         }
         public class AccountLabel {
             public int AccountNumber { get; set; }
             public decimal Balance { get; set; }          
         }
         [HttpGet]
-        public string GetAccounts(int AccountType)
+        public async Task<string> GetAccounts(int AccountType)
         {
+            var user = await _userManager.GetUserAsync(User);
+            var CustomerID = user.CustomerID.Value;
+
             List<Account> list = new List<Account>();
             if (AccountType == 1)
             {
-                list = _context.Account.Where(x => x.AccountType ==Models.AccountType.Checking&&x.CustomerID== CustomerID).ToList();
+                list = _context.Account.Where(x => x.AccountType == s3827202_s3687609_a2.Areas.Banking.Models.AccountType.Checking &&x.CustomerID== CustomerID).ToList();
             }
             else
             {
-                list = _context.Account.Where(x => x.AccountType == Models.AccountType.Saving&& x.CustomerID == CustomerID).ToList();
+                list = _context.Account.Where(x => x.AccountType == s3827202_s3687609_a2.Areas.Banking.Models.AccountType.Saving && x.CustomerID == CustomerID).ToList();
             }
             
             return JsonConvert.SerializeObject(list.Select(x=>new AccountLabel() { AccountNumber=x.AccountNumber,Balance=x.Balance}));

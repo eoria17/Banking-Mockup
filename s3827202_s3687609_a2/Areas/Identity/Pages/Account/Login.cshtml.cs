@@ -85,7 +85,7 @@ namespace s3827202_s3687609_a2.Areas.Identity.Pages.Account
                 if (result.Succeeded)
                 {
                     _logger.LogInformation("User logged in.");
-                    return LocalRedirect(returnUrl);
+                    return RedirectToAction("Index", "Customer", new { area = "Banking" });
                 }
                 if (result.RequiresTwoFactor)
                 {
@@ -98,7 +98,7 @@ namespace s3827202_s3687609_a2.Areas.Identity.Pages.Account
                 }
                 else
                 {
-                    ModelState.AddModelError(string.Empty, "Invalid login attempt.");
+                    ModelState.AddModelError(string.Empty, "Username/password is incorrect.");
                     return Page();
                 }
             }

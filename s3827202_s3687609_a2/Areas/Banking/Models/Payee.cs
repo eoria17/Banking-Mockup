@@ -1,7 +1,7 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 
-namespace s3827202_s3687609_a2.Models
+namespace s3827202_s3687609_a2.Areas.Banking.Models
 {
 
     public class Payee
