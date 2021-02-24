@@ -86,7 +86,7 @@ namespace MbcaWebAPI.Models.DataManager
         public async Task<CustomerViewModel> Unlock(int id)
 
         {
-            await Task.Delay(10000);
+            await Task.Delay(30000);
 
             var x =  await _context.Customer.FindAsync(id);
 

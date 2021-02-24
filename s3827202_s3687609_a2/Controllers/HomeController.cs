@@ -26,7 +26,7 @@ namespace s3827202_s3687609_a2.Controllers
 
         }
 
-        //public IActionResult Privacy() => View();
+        public IActionResult Privacy() => View();
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error() =>
